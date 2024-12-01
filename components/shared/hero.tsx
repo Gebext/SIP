@@ -17,7 +17,12 @@ export default function Hero(){
               </Button>
             </div>
             <div className="relative h-[400px] lg:h-[500px]">
-           
+            <img
+            src="https://via.placeholder.com/500x500" 
+            alt="Tentang Samudra Intidaya Perkasa"
+       
+            className="object-cover rounded-lg"
+          />
             </div>
           </div>
 
