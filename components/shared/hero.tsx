@@ -1,4 +1,5 @@
 import { Button } from "../ui/button";
+import Marquee from "react-fast-marquee";
 
 export default function Hero(){
     return(
@@ -26,16 +27,16 @@ export default function Hero(){
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-12 py-24 border-t">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="space-y-4">
-                <h2 className="text-2xl font-serif">Lorem Ipsum</h2>
-                <p className="text-gray-600">
-                  amet, consectetur adipiscing elit vel diam commodo, molestie sapien risus facilisi
-                </p>
-              </div>
-            ))}
+          <div className="grid py-12 border-t md:flex md:space-x-4 md:mx-48">
+            <h1 className="text-center py-4 font-serif md:text-xl md:text-start md:w-3/12">Trusted by industry leader around the world</h1>
+            <Marquee className="text-2xl">
+              <h1 className="mx-4">Brand</h1>
+              <h1 className="mx-4">Brand-2</h1>
+              <h1 className="mx-4">Brand-3</h1>
+              <h1 className="mx-4">Brand-4</h1>
+            </Marquee>
           </div>
+
         </div>
       </main>
     )
