@@ -52,7 +52,7 @@ const articles = [
 
 function Page() {
   return (
-    <div className="min-h-screen bg-background text-foreground px-4 ">
+    <div className="min-h-screen bg-background text-foreground px-4">
       {/* Header */}
       {/* <header className="border-b">
         <div className="container flex h-16 items-center justify-between">
@@ -78,7 +78,7 @@ function Page() {
 
       {/* Main Content */}
       <main className="container py-12 px-8">
-        <div className="space-y-8">
+        <div className="space-y-8 flex flex-col">
           {/* Blog Header */}
           <div className="space-y-4">
             <Badge variant="outline" className="text-primary">
@@ -141,7 +141,7 @@ function Page() {
             ))}
           </div>
 
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full md:w-[400px] self-center">
             Click to load More...
           </Button>
         </div>
