@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -191,7 +192,6 @@ function Page() {
               </div>
             ))}
           </div>
-
           <Button variant="outline" className="w-full md:w-[400px] self-center">
             Click to load More...
           </Button>
