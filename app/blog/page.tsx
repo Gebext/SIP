@@ -10,21 +10,21 @@ const articles = [
       title: "Revolutionizing Digital Ecosystems",
       date: "2024-11-30",
       category: "Announcement",
-      image: "/placeholder.svg",
+      image: "https://picsum.photos/800/600",
       excerpt: "Exploring innovative strategies that transform traditional paradigms and unlock unprecedented potential for growth and development.",
     },
     {
       title: "The Future of Collaborative Innovation",
       date: "2024-11-27",
       category: "Product",
-      image: "/placeholder.svg",
+      image: "https://picsum.photos/801/600",
       excerpt: "Reimagining interconnected systems through cutting-edge technologies and human-centered design principles that drive meaningful change.",
     },
     {
       title: "Navigating Complex Technological Landscapes",
       date: "2024-11-14",
       category: "Education",
-      image: "/placeholder.svg",
+      image: "https://picsum.photos/801/601",
       excerpt: "Deep dive into emerging trends, strategic insights, and transformative approaches that are reshaping our understanding of technological advancement.",
     },
     {
@@ -77,7 +77,7 @@ function Page() {
       </header> */}
 
       {/* Main Content */}
-      <main className="container py-12">
+      <main className="container py-12 px-8">
         <div className="space-y-8">
           {/* Blog Header */}
           <div className="space-y-4">
@@ -95,7 +95,7 @@ function Page() {
             {articles.slice(0, 3).map((article, i) => (
               <Card key={i} borderless>
                 <CardHeader className="p-0">
-                  <Image
+                  <img
                     src={article.image}
                     alt={`${article.title} thumbnail`}
                     width={400}
