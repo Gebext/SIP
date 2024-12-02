@@ -20,6 +20,9 @@ export default function LandingPage() {
               <Link href="#" className="text-sm text-gray-600 hover:text-gray-900">
                 News & Update
               </Link>
+              <Link href="/blog" className="text-sm text-gray-600 hover:text-gray-900">
+                Blog
+              </Link>
             </nav>
           </div>
         </div>
