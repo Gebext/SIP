@@ -1,55 +1,60 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const articles = [
-    {
-      title: "Revolutionizing Digital Ecosystems",
-      date: "2024-11-30",
-      category: "Announcement",
-      image: "/placeholder.svg",
-      excerpt: "Exploring innovative strategies that transform traditional paradigms and unlock unprecedented potential for growth and development.",
-    },
-    {
-      title: "The Future of Collaborative Innovation",
-      date: "2024-11-27",
-      category: "Product",
-      image: "/placeholder.svg",
-      excerpt: "Reimagining interconnected systems through cutting-edge technologies and human-centered design principles that drive meaningful change.",
-    },
-    {
-      title: "Navigating Complex Technological Landscapes",
-      date: "2024-11-14",
-      category: "Education",
-      image: "/placeholder.svg",
-      excerpt: "Deep dive into emerging trends, strategic insights, and transformative approaches that are reshaping our understanding of technological advancement.",
-    },
-    {
-      title: "Breakthrough Strategies in Global Connectivity",
-      date: "2024-11-05",
-      category: "Partnership",
-      image: "/placeholder.svg",
-      excerpt: "Uncovering revolutionary methods for enhancing communication, collaboration, and synergy across diverse technological ecosystems.",
-    },
-    {
-      title: "Pioneering Interdisciplinary Solutions",
-      date: "2024-10-31",
-      category: "Product",
-      image: "/placeholder.svg",
-      excerpt: "Investigating groundbreaking approaches that bridge multiple domains and create integrated solutions for complex challenges.",
-    },
-    {
-      title: "Celebrating Innovation and Community",
-      date: "2024-10-31",
-      category: "Announcement",
-      image: "/placeholder.svg",
-      excerpt: "Highlighting remarkable achievements, recognizing visionary contributors, and charting exciting pathways for future collaborative endeavors.",
-    },
-  ];
+  {
+    title: "Revolutionizing Digital Ecosystems",
+    date: "2024-11-30",
+    category: "Announcement",
+    image: "/placeholder.svg",
+    excerpt:
+      "Exploring innovative strategies that transform traditional paradigms and unlock unprecedented potential for growth and development.",
+  },
+  {
+    title: "The Future of Collaborative Innovation",
+    date: "2024-11-27",
+    category: "Product",
+    image: "/placeholder.svg",
+    excerpt:
+      "Reimagining interconnected systems through cutting-edge technologies and human-centered design principles that drive meaningful change.",
+  },
+  {
+    title: "Navigating Complex Technological Landscapes",
+    date: "2024-11-14",
+    category: "Education",
+    image: "/placeholder.svg",
+    excerpt:
+      "Deep dive into emerging trends, strategic insights, and transformative approaches that are reshaping our understanding of technological advancement.",
+  },
+  {
+    title: "Breakthrough Strategies in Global Connectivity",
+    date: "2024-11-05",
+    category: "Partnership",
+    image: "/placeholder.svg",
+    excerpt:
+      "Uncovering revolutionary methods for enhancing communication, collaboration, and synergy across diverse technological ecosystems.",
+  },
+  {
+    title: "Pioneering Interdisciplinary Solutions",
+    date: "2024-10-31",
+    category: "Product",
+    image: "/placeholder.svg",
+    excerpt:
+      "Investigating groundbreaking approaches that bridge multiple domains and create integrated solutions for complex challenges.",
+  },
+  {
+    title: "Celebrating Innovation and Community",
+    date: "2024-10-31",
+    category: "Announcement",
+    image: "/placeholder.svg",
+    excerpt:
+      "Highlighting remarkable achievements, recognizing visionary contributors, and charting exciting pathways for future collaborative endeavors.",
+  },
+];
 
 function page() {
   return (
@@ -85,7 +90,9 @@ function page() {
             <Badge variant="outline" className="text-primary">
               Blog
             </Badge>
-            <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl">News, insights and more</h1>
+            <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl">
+              News, insights and more
+            </h1>
             <p className="text-muted-foreground text-lg md:text-xl">
               Learn more about SIP and the latest from our team.
             </p>
@@ -105,9 +112,17 @@ function page() {
                   />
                 </CardHeader>
                 <CardContent className="p-4 space-y-2">
-                  <p className="text-sm text-muted-foreground">{new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {new Date(article.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </p>
                   <CardTitle className="text-xl">{article.title}</CardTitle>
-                  <p className="text-muted-foreground line-clamp-2">{article.excerpt}</p>
+                  <p className="text-muted-foreground line-clamp-2">
+                    {article.excerpt}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -115,13 +130,21 @@ function page() {
 
           {/* Categories */}
           <div className="flex gap-2 flex-wrap">
-            {["All Categories", "Announcement", "Education", "Partnership", "Product"].map(
-              (category) => (
-                <Button key={category} variant={category === "All Categories" ? "default" : "outline"} size="sm">
-                  {category}
-                </Button>
-              )
-            )}
+            {[
+              "All Categories",
+              "Announcement",
+              "Education",
+              "Partnership",
+              "Product",
+            ].map((category) => (
+              <Button
+                key={category}
+                variant={category === "All Categories" ? "default" : "outline"}
+                size="sm"
+              >
+                {category}
+              </Button>
+            ))}
           </div>
 
           {/* Article List */}
@@ -134,7 +157,13 @@ function page() {
                   </h3>
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <span>{article.category}</span>
-                    <span>{new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                    <span>
+                      {new Date(article.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </span>
                   </div>
                 </div>
                 <Separator />
@@ -199,9 +228,7 @@ function page() {
         </div>
       </footer> */}
     </div>
-  )
+  );
 }
 
-
-
-export default page
+export default page;
