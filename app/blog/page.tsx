@@ -1,9 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 
 const articles = [
@@ -51,7 +50,7 @@ const articles = [
     },
   ];
 
-function page() {
+function Page() {
   return (
     <div className="min-h-screen bg-background text-foreground px-4 ">
       {/* Header */}
@@ -94,7 +93,7 @@ function page() {
           {/* Featured Articles Grid */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {articles.slice(0, 3).map((article, i) => (
-              <Card key={i}>
+              <Card key={i} borderless>
                 <CardHeader className="p-0">
                   <Image
                     src={article.image}
@@ -202,6 +201,4 @@ function page() {
   )
 }
 
-
-
-export default page
+export default Page;
