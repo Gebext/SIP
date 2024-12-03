@@ -39,13 +39,13 @@ export default function Navbar() {
           </button>
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 mx-auto">
-            <Link href="#" className="text-sm text-gray-600 hover:text-gray-900">
+            <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900">
               About
             </Link>
-            <Link href="#" className="text-sm text-gray-600 hover:text-gray-900">
+            <Link href="/fokus-layanan" className="text-sm text-gray-600 hover:text-gray-900">
               Fokus Layanan
             </Link>
-            <Link href="#" className="text-sm text-gray-600 hover:text-gray-900">
+            <Link href="/blog" className="text-sm text-gray-600 hover:text-gray-900">
               Blog
             </Link>
           </div>
@@ -53,10 +53,10 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden px-4 py-2 bg-gray-100">
-            <Link href="#" className="block text-sm text-gray-600 hover:text-gray-900 py-2">
+            <Link href="/about" className="block text-sm text-gray-600 hover:text-gray-900 py-2">
               About
             </Link>
-            <Link href="#" className="block text-sm text-gray-600 hover:text-gray-900 py-2">
+            <Link href="fokus-layanan" className="block text-sm text-gray-600 hover:text-gray-900 py-2">
               Fokus Layanan
             </Link>
             <Link href="/blog" className="block text-sm text-gray-600 hover:text-gray-900 py-2">
