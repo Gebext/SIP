@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react";
-import Hero from "@/components/shared/hero";
 import Link from "next/link";
 
 export default function Navbar() {
