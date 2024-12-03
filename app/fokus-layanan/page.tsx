@@ -1,6 +1,5 @@
 import { BarChart, BrainCircuit, PieChart } from "lucide-react";
 import FeatureCard from "@/components/shared/featurecard";
-import andrewImage from "../../public/andrew-neel-ute2XAFQU2I-unsplash.jpg";
 
 export default function FokusLayananSection() {
   // Data layanan
