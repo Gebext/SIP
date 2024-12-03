@@ -1,16 +1,19 @@
-import Image from "next/image";
+
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { useState } from "react";
 
-const articles = [
+const FeaturedArticles = [
   {
     title: "Revolutionizing Digital Ecosystems",
     date: "2024-11-30",
     category: "Announcement",
-    image: "/placeholder.svg",
+    image: "https://picsum.photos/800/600",
     excerpt:
       "Exploring innovative strategies that transform traditional paradigms and unlock unprecedented potential for growth and development.",
   },
@@ -18,7 +21,7 @@ const articles = [
     title: "The Future of Collaborative Innovation",
     date: "2024-11-27",
     category: "Product",
-    image: "/placeholder.svg",
+    image: "https://picsum.photos/801/600",
     excerpt:
       "Reimagining interconnected systems through cutting-edge technologies and human-centered design principles that drive meaningful change.",
   },
@@ -26,10 +29,13 @@ const articles = [
     title: "Navigating Complex Technological Landscapes",
     date: "2024-11-14",
     category: "Education",
-    image: "/placeholder.svg",
+    image: "https://picsum.photos/801/601",
     excerpt:
       "Deep dive into emerging trends, strategic insights, and transformative approaches that are reshaping our understanding of technological advancement.",
   },
+];
+
+const articles = [
   {
     title: "Breakthrough Strategies in Global Connectivity",
     date: "2024-11-05",
@@ -54,37 +60,43 @@ const articles = [
     excerpt:
       "Highlighting remarkable achievements, recognizing visionary contributors, and charting exciting pathways for future collaborative endeavors.",
   },
+  {
+    title: "Revolutionizing Industry Standards with Synergy",
+    date: "2024-11-10",
+    category: "Partnership",
+    image: "/placeholder.svg",
+    excerpt:
+      "Exploring collaborative strategies to unify industry benchmarks and drive global standards for innovation.",
+  },
+  {
+    title: "Unveiling the Future of Integrated Ecosystems",
+    date: "2024-11-15",
+    category: "Product",
+    image: "/placeholder.svg",
+    excerpt:
+      "Delving into cutting-edge technologies that redefine product ecosystems and ensure seamless interoperability.",
+  },
+  {
+    title: "Empowering Communities Through Technological Advances",
+    date: "2024-11-20",
+    category: "Announcement",
+    image: "/placeholder.svg",
+    excerpt:
+      "Announcing new initiatives to bridge technology and community needs for sustainable progress.",
+  },
 ];
 
-function page() {
-  return (
-    <div className="min-h-screen bg-background text-foreground px-4 ">
-      {/* Header */}
-      {/* <header className="border-b">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center space-x-2">
-              <span className="text-xl font-bold">USUAL</span>
-            </Link>
-            <nav className="hidden md:flex gap-6">
-              <Link href="/" className="text-muted-foreground hover:text-foreground">
-                Home
-              </Link>
-              <Link href="/blog" className="text-muted-foreground hover:text-foreground">
-                Blog
-              </Link>
-              <Link href="/docs" className="text-muted-foreground hover:text-foreground">
-                Docs
-              </Link>
-            </nav>
-          </div>
-          <Button variant="outline">Access App</Button>
-        </div>
-      </header> */}
+function Page() {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const handleFilterArticleByCategory = (category: string) => {
+    setSelectedCategory(category);
+  };
 
+  return (
+    <div className="min-h-screen bg-background text-foreground px-4">
       {/* Main Content */}
-      <main className="container py-12">
-        <div className="space-y-8">
+      <main className="container py-12 px-8">
+        <div className="space-y-8 flex flex-col">
           {/* Blog Header */}
           <div className="space-y-4">
             <Badge variant="outline" className="text-primary">
@@ -100,10 +112,10 @@ function page() {
 
           {/* Featured Articles Grid */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {articles.slice(0, 3).map((article, i) => (
-              <Card key={i}>
+            {FeaturedArticles.map((article, i) => (
+              <Card key={i} borderless>
                 <CardHeader className="p-0">
-                  <Image
+                  <img
                     src={article.image}
                     alt={`${article.title} thumbnail`}
                     width={400}
@@ -130,33 +142,43 @@ function page() {
 
           {/* Categories */}
           <div className="flex gap-2 flex-wrap">
-            {[
-              "All Categories",
-              "Announcement",
-              "Education",
-              "Partnership",
-              "Product",
-            ].map((category) => (
-              <Button
-                key={category}
-                variant={category === "All Categories" ? "default" : "outline"}
-                size="sm"
-              >
-                {category}
-              </Button>
-            ))}
+            {["all", ...Array.from(new Set(articles.map((item) => item.category)))].map(
+              (category, i) => (
+                <Button
+                  key={i}
+                  onClick={() => handleFilterArticleByCategory(category)}
+                  variant={
+                    selectedCategory.toLowerCase() === category.toLowerCase()
+                      ? "default"
+                      : "outline"
+                  }
+                  size="sm"
+                  className="capitalize"
+                >
+                  {category}
+                </Button>
+              )
+            )}
           </div>
 
           {/* Article List */}
           <div className="space-y-4">
-            {articles.slice(3).map((article, i) => (
+            {(selectedCategory == "all"
+              ? articles
+              : articles.filter(
+                  (article) =>
+                    article.category.toLowerCase() ===
+                    selectedCategory.toLowerCase()
+                )
+            ).map((article, i) => (
               <div key={i}>
-                <div className="flex justify-between items-center py-4">
+                <div className="flex flex-col-reverse md:flex-row md:justify-between md:items-center py-4">
                   <h3 className="font-semibold hover:text-muted-foreground">
                     <Link href="#">{article.title}</Link>
                   </h3>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-4 md:gap-32 text-sm text-muted-foreground">
                     <span>{article.category}</span>
+                    <span className="md:hidden">/</span>
                     <span>
                       {new Date(article.date).toLocaleDateString("en-US", {
                         year: "numeric",
@@ -170,8 +192,7 @@ function page() {
               </div>
             ))}
           </div>
-
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full md:w-[400px] self-center">
             Click to load More...
           </Button>
         </div>
@@ -231,4 +252,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
