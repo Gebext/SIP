@@ -1,13 +1,13 @@
 
 import AboutSection from "./about/page";
-import LandingPage from "./fokus-layanan/page";
 import NewsSection from "./news-and-update/page";
 import Footer from "@/components/shared/footer";
+import Hero from "@/components/shared/hero";
 
 export default function Home() {
   return (
     <div >
-      <LandingPage/>
+      <Hero/>
       <AboutSection/>
       <NewsSection  />
       <Footer/>
