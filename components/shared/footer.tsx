@@ -108,9 +108,9 @@ export default function Footer() {
             <p className="text-sm text-gray-500">
               © 2016-2024, Wealthsimple Technologies Inc. All Rights Reserved.
             </p>
-            {/* <select className="border rounded-md px-3 py-1">
+            <select className="border rounded-md px-3 py-1">
               <option>English</option>
-            </select> */}
+            </select>
           </div>
           <p className="text-sm text-gray-500 mt-4">
             For further details see our <a href="#" className="underline">Legal Disclosures</a>.

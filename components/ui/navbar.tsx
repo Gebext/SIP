@@ -39,7 +39,7 @@ export default function Navbar() {
             </svg>
           </button>
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-8 mx-auto">
             <Link href="#" className="text-sm text-gray-600 hover:text-gray-900">
               About
             </Link>
