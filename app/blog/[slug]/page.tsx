@@ -29,12 +29,11 @@ export async function generateStaticParams() {
     const articles: currentArticleType = response.data;
     console.log(response);
 
-    if (articles) {
-      const paths = articles.data?.map((article) => ({
-        slug: article.slug,
-      }));
-      return paths;
-    }
+  
+    const paths = articles.data?.map((article) => ({
+      slug: article.slug,
+    }));
+    return paths||[];
   } catch (error) {
     console.log("Error fetching articles for static params:", error);
     return []; // Return empty array if there's an error
