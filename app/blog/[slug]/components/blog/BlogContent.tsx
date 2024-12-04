@@ -25,7 +25,7 @@ export type currentArticleType = {
           body: string;
       }[];
   }];
-  meta?: {};
+  meta?: {}; // eslint-disable-line
 }
 
 // type currentArticle = {
