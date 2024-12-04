@@ -1,8 +1,5 @@
 import BlogContent, { currentArticleType } from "@/app/blog/[slug]/components/blog/BlogContent";
 import strapiClient from "@/helper/apiClient";
-import { notFound } from "next/navigation";
-
-
 
 export default async function Page({
   params,
@@ -12,6 +9,7 @@ export default async function Page({
   const { slug } =  params;
 
   try {
+    console.log("hello");
     const response = await strapiClient.get(`/articles?filters[slug][$eq]=${slug}`);
     console.log(response.data);
 
@@ -22,8 +20,7 @@ export default async function Page({
     );
     
   } catch (error) {
-    console.error('Error fetching article:', error);
-    return notFound(); // Trigger 404 if an error occurs
+    console.error('Error fetching article:', error);// Trigger 404 if an error occurs
   }
 
 }
@@ -33,6 +30,7 @@ export async function generateStaticParams() {
     // Fetch data from Strapi
     const response = await strapiClient.get("/articles");
     const articles:currentArticleType = response.data;
+    console.log(response);
 
 
     const paths = articles.data?.map((article) => ({
