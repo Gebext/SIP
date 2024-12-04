@@ -6,8 +6,8 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import strapiClient from "@/helper/apiClient";
-import { useState } from "react";
+// import strapiClient from "@/helper/apiClient";
+// import { useState } from "react";
 
 export type currentArticleType = {
   data?: [{
@@ -28,23 +28,24 @@ export type currentArticleType = {
   meta?: {};
 }
 
-type currentArticle = {
-  id: number;
-  documentId: string;
-  title: string;
-  description: string;
-  slug: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  blocks: {
-      __component: string;
-      id: number;
-      body: string;
-  }[];
-}
+// type currentArticle = {
+//   id: number;
+//   documentId: string;
+//   title: string;
+//   description: string;
+//   slug: string;
+//   createdAt: string;
+//   updatedAt: string;
+//   publishedAt: string;
+//   blocks: {
+//       __component: string;
+//       id: number;
+//       body: string;
+//   }[];
+// }
 
 export default function BlogContent({ slugName }: { slugName?: string }) {
+  console.log(slugName);
   // const [article,setArticle]= useState<currentArticle|null>(null)
 
   // const fetchCurrentArticle = async() => {
@@ -61,10 +62,6 @@ export default function BlogContent({ slugName }: { slugName?: string }) {
   // }
 
   
-
-
-
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8 py-12 ">
