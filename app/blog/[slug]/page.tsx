@@ -3,7 +3,8 @@ import BlogContent, {
 } from "@/app/blog/[slug]/components/blog/BlogContent";
 import strapiClient from "@/helper/apiClient";
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   try {
     console.log("hello");
     const response = await strapiClient.get(
