@@ -45,20 +45,20 @@ type currentArticle = {
 }
 
 export default function BlogContent({ slugName }: { slugName?: string }) {
-  const [article,setArticle]= useState<currentArticle|null>(null)
+  // const [article,setArticle]= useState<currentArticle|null>(null)
 
-  const fetchCurrentArticle = async() => {
-    try {
-      const response = (await strapiClient.get<currentArticleType>("/articles")).data
-      const articles = response.data
-      const currentArticle = articles?.find(
-        (article) => article.slug === slugName
-      )
-      setArticle(currentArticle??null)
-    } catch (error) {
-      console.log(error); 
-    }
-  }
+  // const fetchCurrentArticle = async() => {
+  //   try {
+  //     const response = (await strapiClient.get<currentArticleType>("/articles")).data
+  //     const articles = response.data
+  //     const currentArticle = articles?.find(
+  //       (article) => article.slug === slugName
+  //     )
+  //     setArticle(currentArticle??null)
+  //   } catch (error) {
+  //     console.log(error); 
+  //   }
+  // }
 
   
 
