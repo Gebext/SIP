@@ -1,70 +1,88 @@
-"use client"
+'use client'
 
-import { useState } from "react";
-import Link from "next/link";
+import Link from 'next/link'
 
-export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+interface NavigationProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
+export default function Navigation({ isOpen, onClose }: NavigationProps) {
   return (
-    <div className="bg-white">
-      <header className="py-2">
-        <h1 className="text-center text-5xl lg:text-6xl font-serif tracking-tight">SIP.</h1>
-      </header>
-      <nav className="border-y">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-         
-          <button
-            className="md:hidden flex items-center px-3 py-2 border rounded text-gray-600 border-gray-600"
-            onClick={toggleMenu}
-          >
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8 mx-auto">
-            <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900">
-              About
-            </Link>
-            <Link href="/fokus-layanan" className="text-sm text-gray-600 hover:text-gray-900">
-              Fokus Layanan
-            </Link>
-            <Link href="/blog" className="text-sm text-gray-600 hover:text-gray-900">
-              Blog
-            </Link>
+    <div
+      className={`fixed inset-0 bg-neutral-900 transition-transform duration-500 ease-in-out ${
+        isOpen ? 'translate-x-0' : 'translate-x-full'
+      }`}
+    >
+      <nav className="h-full flex flex-col justify-between p-8 text-neutral-200">
+        <button
+          onClick={onClose}
+          className="absolute top-8 right-8 p-2"
+          aria-label="Close menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+
+        <div className="mt-20">
+          <ul className="space-y-4 text-6xl font-light">
+            <li>
+              <Link href="/tentang-kami" className="hover:text-white transition-colors">
+                Tentang Kami
+              </Link>
+            </li>
+            <li>
+              <Link href="/fokus-layanan" className="hover:text-white transition-colors">
+                Fokus Layanan
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog" className="hover:text-white transition-colors">
+                Blog
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-neutral-400">
+          <div>
+            <h3 className="font-medium mb-4">Jakarta</h3>
+            <p className="text-sm">
+              Jl. Casablanca Raya Kav. 88
+              <br />
+              Jakarta Selatan
+              <br />
+              12870, Indonesia
+            </p>
+          </div>
+          <div>
+            <h3 className="font-medium mb-4">Bali</h3>
+            <p className="text-sm">
+              Jalan Merta Agung, No.25,
+              <br />
+              Kerobokan Kelod, Badung
+              <br />
+              80361, Indonesia
+            </p>
+          </div>
+          <div>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/contact" className="hover:text-white transition-colors">
+                  Hubungi Kami
+                </Link>
+              </li>
+              <li>
+                <Link href="/karir" className="hover:text-white transition-colors">
+                  Karir
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden px-4 py-2 bg-gray-100">
-            <Link href="/about" className="block text-sm text-gray-600 hover:text-gray-900 py-2">
-              About
-            </Link>
-            <Link href="fokus-layanan" className="block text-sm text-gray-600 hover:text-gray-900 py-2">
-              Fokus Layanan
-            </Link>
-            <Link href="/blog" className="block text-sm text-gray-600 hover:text-gray-900 py-2">
-              Blog
-            </Link>
-          </div>
-        )}
       </nav>
     </div>
-  );
+  )
 }
+

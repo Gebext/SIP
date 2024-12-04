@@ -1,128 +1,147 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Instagram, Linkedin, Twitter, Youtube } from 'lucide-react'
+"use client";
+
+import { useState } from "react";
 
 export default function Footer() {
+  const [activeMap, setActiveMap] = useState("singapore");
+
   return (
-    <footer className="bg-white py-12 px-4 border-t">
-      <div className="max-w-7xl mx-auto">
-        {/* Newsletter Section */}
-        <div className="mb-16 w-full md:flex justify-between">
-        <div>
-            <div className="flex items-center gap-2 mb-4">
-                <h2 className="text-xl font-bold">SIP.co</h2>
+    <footer className="bg-white text-gray-800 py-20">
+      <div className="container mx-auto px-4">
+        <h2 className="text-gray-700 text-7xl md:text-8xl mb-10">Let's Talk.</h2>
+
+        {/* Google Maps Embed */}
+        <div className="mb-20">
+          <div className="flex space-x-4 mb-4">
+            <button
+              onClick={() => setActiveMap("singapore")}
+              className={`px-4 py-2 rounded ${
+                activeMap === "singapore"
+                  ? "bg-gray-700 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              Singapore Office
+            </button>
+            <button
+              onClick={() => setActiveMap("bali")}
+              className={`px-4 py-2 rounded ${
+                activeMap === "bali"
+                  ? "bg-gray-700 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              Bali Office
+            </button>
+          </div>
+          <div className="w-full h-[400px] rounded-lg overflow-hidden">
+            {activeMap === "singapore" ? (
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8204620628224!2d103.84683431475396!3d1.2816896990635992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da190d593a26ad%3A0x886f12fe6f53fb81!2s180%20Robinson%20Rd%2C%20Singapore%20068914!5e0!3m2!1sen!2sus!4v1638774083360!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+              ></iframe>
+            ) : (
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.2950067507856!2d115.16169731532558!3d-8.665069193769068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd247a1e42e7e7f%3A0x6d2a2e2f7c8d3f0b!2sJl.%20Merta%20Agung%20No.25%2C%20Kerobokan%20Kelod%2C%20Kec.%20Kuta%20Utara%2C%20Kabupaten%20Badung%2C%20Bali%2080361%2C%20Indonesia!5e0!3m2!1sen!2sus!4v1638774219909!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+              ></iframe>
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Singapore Office */}
+          <div className="space-y-4">
+            <h3 className="text-lg text-gray-700 mb-6">Singapore</h3>
+            <div className="space-y-1 text-sm text-gray-600">
+              <p>SIP PTE. LTD.</p>
+              <p>180 Robinson Road, #14-04</p>
+              <p>Singapore Business Federation</p>
+              <p>Centre - 068914, Singapore</p>
             </div>
-          <p className="text-gray-600 mb-4">
-            Sign up for our weekly non-boring newsletter about money, markets, and more.
-          </p>
-        </div>
-
-        <div className="max-w-xl">
-        <div className="flex gap-4 flex-col sm:flex-row">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1"
-            />
-            <Button>Subscribe</Button>
           </div>
-          <p className="text-xs text-gray-500 mt-2">
-            By providing your email, you are consenting to receive communications from Wealthsimple Media Inc.
-            Visit our <a href="#" className="underline">Privacy Policy</a> or contact us at privacy@wealthsimple.com
-          </p>
-        </div>
-          
-        </div>
 
-        {/* Navigation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {/* About Us Column */}
-          <div>
-            <h3 className="font-semibold mb-4">Navigation</h3>
-            <ul className="space-y-3">
-              <li><a href="#" className="text-gray-600 hover:text-gray-900">About us</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-gray-900">Blog</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-gray-900">Fokus Layanan</a></li>
+          {/* Bali Office */}
+          <div className="space-y-4">
+            <h3 className="text-lg text-gray-700 mb-6">Bali, Indonesia</h3>
+            <div className="space-y-1 text-sm text-gray-600">
+              <p>PT SAMUDRA INTIDAYA PERKASA</p>
+              <p>Jalan Merta Agung, No.25,</p>
+              <p>Kerobokan Kelod, Badung,</p>
+              <p>Bali - 80361, Indonesia</p>
+            </div>
+          </div>
+
+          {/* Navigation Links 1 */}
+          <div className="space-y-4">
+            <ul className="space-y-3 text-sm text-gray-600">
+              <li className="flex items-baseline">
+                <a href="#" className="hover:text-gray-700">Home</a>
+              </li>
+              <li className="flex items-baseline">
+                <a href="#" className="hover:text-gray-700">Works</a>
+                <sup className="text-xs ml-1 opacity-50">17</sup>
+              </li>
+              <li className="flex items-baseline">
+                <a href="#" className="hover:text-gray-700">Expertise</a>
+                <sup className="text-xs ml-1 opacity-50">06</sup>
+              </li>
+              <li className="flex items-baseline">
+                <a href="#" className="hover:text-gray-700">About</a>
+              </li>
+              <li className="flex items-baseline">
+                <a href="#" className="hover:text-gray-700">Journal</a>
+                <sup className="text-xs ml-1 opacity-50">33</sup>
+              </li>
             </ul>
           </div>
 
-          {/* Legal Column */}
-          <div>
-            <h3 className="font-semibold mb-4">Legal</h3>
-            <ul className="space-y-3">
-              <li><a href="#" className="text-gray-600 hover:text-gray-900">Accessibility</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-gray-900">Privacy policy</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-gray-900">Terms of use</a></li>
-            </ul>
-          </div>
-
-         
-
-          {/* Products Column */}
-          <div>
-            <h3 className="font-semibold mb-4">Fokus Layanan</h3>
-            <ul className="space-y-3">
-              <li><a href="#" className="text-gray-600 hover:text-gray-900">Riset</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-gray-900">Rekomendasi & Formulasi Strategis</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-gray-900">Data & Analisis</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-gray-900">Admove/Advokasi</a></li>
-             
-            </ul>
-          </div>
-
-          {/* Social Column */}
-          <div>
-            <h3 className="font-semibold mb-4">Social</h3>
-            <ul className="space-y-3">
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
-                  <Instagram className="h-5 w-5" />
-                  Instagram
-                </a>
+          {/* Navigation Links 2 */}
+          <div className="space-y-4">
+            <ul className="space-y-3 text-sm text-gray-600">
+              <li className="flex items-baseline">
+                <a href="#" className="hover:text-gray-700">Awards</a>
+                <sup className="text-xs ml-1 opacity-50">59</sup>
+              </li>
+              <li className="flex items-baseline">
+                <a href="#" className="hover:text-gray-700">Brands</a>
+                <sup className="text-xs ml-1 opacity-50">141</sup>
+              </li>
+              <li className="flex items-baseline">
+                <a href="#" className="hover:text-gray-700">Careers</a>
+                <sup className="text-xs ml-1 opacity-50">04</sup>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
-                  <Twitter className="h-5 w-5" />
-                  X
-                </a>
+                <a href="#" className="hover:text-gray-700">Inquiries</a>
               </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
-                  <Youtube className="h-5 w-5" />
-                  YouTube
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900 flex items-center gap-2">
-                  <Linkedin className="h-5 w-5" />
-                  LinkedIn
-                </a>
+              <li className="flex items-baseline">
+                <a href="#" className="hover:text-gray-700">Transform</a>
+                <span className="ml-2">→</span>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="border-t pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <p className="text-sm text-gray-500">
-              © 2016-2024, Wealthsimple Technologies Inc. All Rights Reserved.
-            </p>
-            <select className="border rounded-md px-3 py-1">
-              <option>English</option>
-            </select>
+        {/* Footer Bottom */}
+        <div className="mt-20 flex flex-col md:flex-row justify-between items-start md:items-center text-sm">
+          <div className="flex space-x-4 mb-4 md:mb-0">
+            <a href="#" className="hover:text-gray-700">Wa</a>
+            <a href="#" className="hover:text-gray-700">Tl</a>
+            <a href="#" className="hover:text-gray-700">Tw</a>
           </div>
-          <p className="text-sm text-gray-500 mt-4">
-            For further details see our <a href="#" className="underline">Legal Disclosures</a>.
-            By using this website, you accept our <a href="#" className="underline">Terms of Use</a> and
-            <a href="#" className="underline">Privacy Policy</a>.
-          </p>
-          <p className="text-sm text-gray-500 mt-2">
-            For information about filing a complaint please visit <a href="#" className="underline">how to File a Complaint</a>.
-          </p>
+          <div className="flex items-center space-x-4 text-gray-600">
+            <span>© 2024 SIP.</span>
+            <a href="#" className="hover:text-gray-700">Terms.</a>
+            <a href="#" className="hover:text-gray-700">Sitemap.</a>
+          </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
-
