@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="bg-white text-gray-800 py-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-gray-700 text-7xl md:text-8xl mb-10">Let's Talk.</h2>
+        <h2 className="text-gray-700 text-7xl md:text-8xl mb-10">{"Let's Talk"}</h2>
 
         {/* Google Maps Embed */}
         <div className="mb-20">
