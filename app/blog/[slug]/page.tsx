@@ -2,15 +2,19 @@ import BlogContent, {
   currentArticleType,
 } from "@/app/blog/[slug]/components/blog/BlogContent";
 import strapiClient from "@/helper/apiClient";
+import { notFound } from "next/navigation";
 
 export default async function Page(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
   try {
-    console.log("hello");
     const response = await strapiClient.get(
       `/articles?filters[slug][$eq]=${params.slug}`
     );
-    console.log(response.data);
+    const slugLength:number = response.data?.data.length||0
+
+    if (!slugLength) {
+      return notFound()
+    }
 
     return (
       <div className="mx-auto min-h-screen max-w-7xl px-4 py-8">
@@ -27,7 +31,6 @@ export async function generateStaticParams() {
     // Fetch data from Strapi
     const response = await strapiClient.get("/articles");
     const articles: currentArticleType = response.data;
-    console.log(response);
 
   
     const paths = articles.data?.map((article) => ({
