@@ -50,7 +50,7 @@ export default function FokusLayanan() {
   return (
     <section className="bg-black text-white py-16 px-4 md:px-8 lg:px-16">
       <section className="h-screen">
-        <div className="flex justify-end">
+        <header className="flex justify-end">
           <div className="flex items-center gap-4">
             <div className="text-gray-100 text-xl font-light font-serif">
               SIP.
@@ -78,7 +78,7 @@ export default function FokusLayanan() {
               </svg>
             </button>
           </div>
-        </div>
+        </header>
         <div className="max-w-5xl py-64 mx-auto">
           <h2 className="text-sm font-light mb-6">/ Fokus Layanan</h2>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight">

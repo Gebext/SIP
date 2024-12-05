@@ -18,7 +18,9 @@ export type Article = {
 
 const getArticlesInfo = async (): Promise<Article[]> => {
   try {
-    const response = await strapiClient.get("/articles?sort[0]=publishedAt:desc&pagination[page]=1&pagination[pageSize]=4");
+    const response = await strapiClient.get(
+      "/articles?sort[0]=publishedAt:desc&pagination[page]=1&pagination[pageSize]=4"
+    );
     const articlesInfo = response.data.data.map((article: Article) => {
       return {
         title: article.title,
@@ -26,10 +28,10 @@ const getArticlesInfo = async (): Promise<Article[]> => {
         description: article.description,
       };
     });
-    return articlesInfo
+    return articlesInfo;
   } catch (error) {
     console.log(error);
-    return []
+    return [];
   }
 };
 
@@ -49,9 +51,7 @@ export default async function Page(props: {
     const author: string = article.author.name;
     const date = article.publishedAt;
 
-    const articlesInfo = await getArticlesInfo()
-
-    
+    const articlesInfo = await getArticlesInfo();
 
     const formattedDate = new Intl.DateTimeFormat("en-US", {
       year: "numeric",
@@ -64,6 +64,8 @@ export default async function Page(props: {
       return notFound();
     }
 
+    console.log(article.category.name);
+
     return (
       <>
         <BlogContent
@@ -73,11 +75,12 @@ export default async function Page(props: {
           author={author}
           articlesInfo={articlesInfo}
           slugName={params.slug}
+          category={article.category.name}
         />
       </>
     );
   } catch (error) {
-    console.error("Error fetching article:", error); // Trigger 404 if an error occurs
+    console.error("Error fetching article:", error);
     return notFound();
   }
 }

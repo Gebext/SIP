@@ -1,39 +1,8 @@
 "use client";
 
+import Navigation from "@/components/ui/navbar";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
-import Image from "next/image";
-
-const FeaturedArticles = [
-  {
-    title: "Revolutionizing Digital Ecosystems",
-    date: "2024-11-30",
-    category: "Announcement",
-    image: "https://picsum.photos/800/600",
-    excerpt:
-      "Exploring innovative strategies that transform traditional paradigms and unlock unprecedented potential for growth and development.",
-  },
-  {
-    title: "The Future of Collaborative Innovation",
-    date: "2024-11-27",
-    category: "Product",
-    image: "https://picsum.photos/801/600",
-    excerpt:
-      "Reimagining interconnected systems through cutting-edge technologies and human-centered design principles that drive meaningful change.",
-  },
-  {
-    title: "Navigating Complex Technological Landscapes",
-    date: "2024-11-14",
-    category: "Education",
-    image: "https://picsum.photos/801/601",
-    excerpt:
-      "Deep dive into emerging trends, strategic insights, and transformative approaches that are reshaping our understanding of technological advancement.",
-  },
-];
 
 function BlogList({
   articles,
@@ -42,179 +11,131 @@ function BlogList({
     title: string;
     slug: string;
     description: string;
-    cover: string; // URL of the image
-    date: string; // Date in 'YYYY-MM-DD' format
-    category: string; // Category name
+    cover: string;
+    date: string;
+    category: string;
   }[];
 }) {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const allArticles = articles || [];
+
+  const categories = [
+    "All",
+    ...new Set(allArticles.map((article) => article.category)),
+  ];
+
+  const filteredArticles =
+    selectedCategory === "All"
+      ? allArticles
+      : allArticles.filter((article) => article.category === selectedCategory);
+
   const handleFilterArticleByCategory = (category: string) => {
     setSelectedCategory(category);
   };
 
-  console.log(articles);
-
   return (
-    <div className="min-h-screen bg-background text-foreground px-4">
-      {/* Main Content */}
-      <main className="container py-12 px-8">
-        <div className="space-y-8 flex flex-col">
-          {/* Blog Header */}
-          <div className="space-y-4">
-            <Badge variant="outline" className="text-primary">
-              Blog
-            </Badge>
-            <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl">
-              News, insights and more
-            </h1>
-            <p className="text-muted-foreground text-lg md:text-xl">
-              Learn more about SIP and the latest from our team.
-            </p>
-          </div>
-
-          {/* Featured Articles Grid */}
-          {articles && (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {articles?.map((article, i) => (
-                <Card key={i} borderless>
-                  <CardHeader className="p-0">
-                    <Image
-                      src={article?.cover}
-                      alt={`${article.title} thumbnail`}
-                      width={400}
-                      height={300}
-                      className="rounded-t-lg object-contain w-full aspect-[4/3]"
-                    />
-                  </CardHeader>
-                  <CardContent className="p-4 space-y-2">
-                    <p className="text-sm text-muted-foreground">
-                      {new Date(article.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </p>
-                    <CardTitle className="text-xl">{article.title}</CardTitle>
-                    <p className="text-muted-foreground line-clamp-2">
-                      {article.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
+    <div className="min-h-screen bg-black text-white">
+      <main className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
+        <div className="flex justify-end">
+          <div className="flex items-center gap-4">
+            <div className="text-gray-100 text-xl font-light font-serif">
+              SIP.
             </div>
-          )}
-
-          {/* Categories */}
-          {articles && (
-            <div className="flex gap-2 flex-wrap">
-              {[
-                "all",
-                ...Array.from(new Set(articles?.map((item) => item.category))),
-              ].map((category, i) => (
-                <Button
-                  key={i}
-                  onClick={() => handleFilterArticleByCategory(category)}
-                  variant={
-                    selectedCategory.toLowerCase() === category.toLowerCase()
-                      ? "default"
-                      : "outline"
-                  }
-                  size="sm"
-                  className="capitalize"
-                >
-                  {category}
-                </Button>
-              ))}
-            </div>
-          )}
-
-          {/* Article List */}
-          <div className="space-y-4">
-            {(selectedCategory == "all"
-              ? articles
-              : articles?.filter(
-                  (article) =>
-                    article.category.toLowerCase() ===
-                    selectedCategory.toLowerCase()
-                )
-            )?.map((article, i) => (
-              <div key={i}>
-                <div className="flex flex-col-reverse md:flex-row md:justify-between md:items-center py-4">
-                  <h3 className="font-semibold hover:text-muted-foreground">
-                    <Link href={`blog/${article.slug}`}>{article.title}</Link>
-                  </h3>
-                  <div className="flex items-center gap-4 md:gap-32 text-sm text-muted-foreground">
-                    <span>{article.category}</span>
-                    <span className="md:hidden">/</span>
-                    <span>
-                      {new Date(article.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </span>
-                  </div>
-                </div>
-                <Separator />
-              </div>
-            ))}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-100 focus:outline-none"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {isMenuOpen ? (
+                  <path d="M3 12h18M3 6h18M3 18h18" />
+                ) : (
+                  <path d="M3 12h18M3 6h18M3 18h18" />
+                )}
+              </svg>
+            </button>
           </div>
-          <Button variant="outline" className="w-full md:w-[400px] self-center">
-            Click to load More...
-          </Button>
         </div>
-      </main>
+        <header className="py-6 sm:py-8">
+          <h2 className="text-xs sm:text-sm font-light mb-4 sm:mb-6">/ Blog</h2>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
+            Elevating Brands through
+            <br />
+            innovation in Digital
+            <br />
+            Transformation.
+          </h1>
+        </header>
 
-      {/* Footer */}
-      {/* <footer className="bg-secondary text-secondary-foreground py-16">
-        <div className="container grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <span className="text-xl font-bold">USUAL</span>
-            </Link>
-            <p className="text-muted-foreground">
-              Usual is a secure and decentralized Fiat Stablecoin issuer that redistributes ownership and governance through
-              the $USUAL token.
-            </p>
-            <div className="flex gap-2">
-              <Input type="email" placeholder="email@usual.company" />
-              <Button variant="outline">Subscribe</Button>
-            </div>
-          </div>
-
-          {[
-            {
-              title: "About",
-              links: ["Home", "Blog", "Contact", "Brand Kit"],
-            },
-            {
-              title: "Product",
-              links: ["Documentation", "Whitepaper", "Changelog", "Feature requests"],
-            },
-            {
-              title: "Ecosystem",
-              links: ["Mirror", "Careers", "Build with us"],
-            },
-            {
-              title: "Legal & Security",
-              links: ["Terms of Services", "Privacy Policy", "Risk Policy", "Audit", "Bug Bounty"],
-            },
-          ].map((section, i) => (
-            <div key={i} className="space-y-4">
-              <h4 className="font-semibold">{section.title}</h4>
-              <ul className="space-y-2">
-                {section.links.map((link, j) => (
-                  <li key={j}>
-                    <Link href="#" className="text-muted-foreground hover:text-foreground">
-                      {link}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        {/* Filter Buttons */}
+        <div className="flex space-x-4 mb-8 overflow-auto">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => handleFilterArticleByCategory(category)}
+              className={`px-4 py-2 text-sm rounded ${
+                selectedCategory === category
+                  ? "bg-white text-black"
+                  : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+              } transition`}
+            >
+              {category}
+            </button>
           ))}
         </div>
-      </footer> */}
+
+        <div className="space-y-12 sm:space-y-16 md:space-y-24">
+          {filteredArticles.length > 0 ? (
+            filteredArticles.map((article, i) => (
+              <div key={i} className="border-t border-gray-800 pt-8 sm:pt-12">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+                  {/* Left Column - Index and Category */}
+                  <div className="md:col-span-2 space-y-1 sm:space-y-2">
+                    <p className="text-gray-500 font-mono text-sm sm:text-base">
+                      / {String(i + 1).padStart(3, "0")}
+                    </p>
+                    <p className="text-gray-500 text-sm sm:text-base">
+                      / {article.category}
+                    </p>
+                  </div>
+
+                  {/* Middle Column - Title */}
+                  <div className="md:col-span-6">
+                    <Link href={`blog/${article.slug}`}>
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-normal leading-snug sm:leading-tight tracking-tight hover:text-gray-300 transition-colors">
+                        {article.title}
+                      </h2>
+                    </Link>
+                  </div>
+
+                  {/* Right Column - Description */}
+                  <div className="md:col-span-4">
+                    <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
+                      {article.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-gray-400 text-lg">
+              No articles found for this category.
+            </p>
+          )}
+        </div>
+      </main>
+      <Navigation isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </div>
   );
 }
