@@ -109,7 +109,7 @@ export default function AboutSection() {
               <span className="underline">Bali, Indonesia</span>, Fleava has
               become one of the best quality Digital Agencies Worldwide. Our
               focus has always been to create enjoyable, intuitive, engaging,
-              and remarkable experiences for people — that's what sets us apart
+              and remarkable experiences for people — thats what sets us apart
               from everyone else.
             </motion.div>
           </div>
