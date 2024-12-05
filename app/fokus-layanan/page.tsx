@@ -13,37 +13,36 @@ interface FokusSectionData {
 
 const fokusSections: FokusSectionData[] = [
   {
-    title: "Digital Strategy",
-    heading: "Intelligent strategies that speak to today's Consumer.",
+    title: "Riset",
+    heading: "Melakukan riset kualitatif dan kuantitatif secara komprehensif.",
     description:
-      "Consumer Insights & Trends, Go-To-Market Planning, Data Science & Analytics, Product Strategy & Roadmapping.",
+      "dengan didukung data yang valid sehingga membantu klien dalam memecahkan kompleksitas dan akar masalah yang dihadapi. Kami melakukan kajian, penelitian dan memberikan layanan di bidang kebijakan publik, ekonomi bisnis dan sosial yang membantu mengidentifikasi masalah, merumuskan strategi kebijakan yang akurat dan memberikan solusi yang tepat dalam pengambilan keputusan secara efektif dan rasional mencerahkan.",
     imageRight: false,
   },
   {
-    title: "Branding",
-    heading: "We make better Brands and make Brands better.",
+    title: "Rekomendasi dan Formulasi Strategis",
+    heading: "Dengan didukung para ahli di bidangnya masing-masing.",
     description:
-      "Brand Strategy, Brand Identity & Positioning, Visual Language, Brand Messaging, Brand Implementation & Guidelines.",
+      "kami memberikan rekomendasi strategis yang berbasiskan integrasi data dan informasi sehingga membantu klien dalam menentukan keputusan strategis yang lebih baik. Klien akan lebih mudah merumuskan pembuatan kebijakan yang akurat, tepat waktu dan berkualitas serta membantu agar proses tahapannya lebih terukur, mulai dari perencanaan, pemantauan, analis data dan fase evaluasinya.",
     imageRight: true,
   },
   {
-    title: "User Experience",
-    heading: "Crafting intuitive experiences for all users.",
+    title: "Data dan Analisis",
+    heading:
+      "Berbasiskan jaringan yang luas, kami dapat memperoleh data dan informasi akurat.",
     description:
-      "Experience Design, Usability Testing, Information Architecture, Accessibility & Inclusivity Design.",
+      "saat melakukan pemetaan kebutuhan dan tantangan klien. Sekmen ini termasuk survei pasar, survei opini publik, survei perilaku yang diperlukan di lapangan. Dengan pendekatan kajian ilmian, klien akan dimudahkan saat hendak mengetahui potensi dan keunggulannya sehingga target klien bisa lebih terukur.",
     imageRight: false,
   },
   {
-    title: "Technology",
-    heading: "Innovative technologies tailored to your needs.",
+    title: "AdMove/Advokasi",
+    heading:
+      "Kami juga turut serta membuka kesempatan kerjasama dengan berbagai stakeholder.",
     description:
-      "Full-Stack Development, Mobile Applications, Cloud Solutions, Emerging Technologies like AI and Blockchain.",
+      "untuk mendorong terwujudnya berbagai isu strategis yang berkontribusi terhadap peningkatan kualitas keadaban dan kepentingan publik, yang mempercepat terciptanya kesejahteraan dan keadilan sosial melalui program-program yang menyentuh akar rumput dalam bentuk grassroots activation maupun pemetaan lapangan.",
     imageRight: true,
   },
 ];
-
-
-
 
 export default function FokusLayanan() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -53,7 +52,9 @@ export default function FokusLayanan() {
       <section className="h-screen">
         <div className="flex justify-end">
           <div className="flex items-center gap-4">
-            <div className="text-gray-100 text-xl font-light font-serif">SIP.</div>
+            <div className="text-gray-100 text-xl font-light font-serif">
+              SIP.
+            </div>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-100 focus:outline-none"
@@ -79,7 +80,7 @@ export default function FokusLayanan() {
           </div>
         </div>
         <div className="max-w-5xl py-64 mx-auto">
-          <h2 className="text-sm font-light mb-6">/ Expertise</h2>
+          <h2 className="text-sm font-light mb-6">/ Fokus Layanan</h2>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
             Elevating Brands through
             <br />
