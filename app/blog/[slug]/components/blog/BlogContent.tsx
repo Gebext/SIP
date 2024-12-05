@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -6,11 +6,11 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-// import strapiClient from "@/helper/apiClient";
-// import { useState } from "react";
+import Markdown from "react-markdown";
 
 export type currentArticleType = {
-  data?: [{
+  data?: [
+    {
       id: number;
       documentId: string;
       title: string;
@@ -20,13 +20,14 @@ export type currentArticleType = {
       updatedAt: string;
       publishedAt: string;
       blocks: {
-          __component: string;
-          id: number;
-          body: string;
+        __component: string;
+        id: number;
+        body: string;
       }[];
-  }];
+    }
+  ];
   meta?: {}; // eslint-disable-line
-}
+};
 
 // type currentArticle = {
 //   id: number;
@@ -44,26 +45,17 @@ export type currentArticleType = {
 //   }[];
 // }
 
-export default function BlogContent({ slugName }: { slugName?: string }) {
-  console.log(slugName);
-  // const [article,setArticle]= useState<currentArticle|null>(null)
+export default function BlogContent({
+  slugName,
+  markDownContent,
+}: {
+  slugName?: string;
+  markDownContent?: any;
+}) {
+  console.log(markDownContent);
 
-  // const fetchCurrentArticle = async() => {
-  //   try {
-  //     const response = (await strapiClient.get<currentArticleType>("/articles")).data
-  //     const articles = response.data
-  //     const currentArticle = articles?.find(
-  //       (article) => article.slug === slugName
-  //     )
-  //     setArticle(currentArticle??null)
-  //   } catch (error) {
-  //     console.log(error); 
-  //   }
-  // }
-
-  
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-black text-white text-foreground">
       <div className="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8 py-12 ">
         {/* Header container with Back to Blog, Date, and Title */}
         <div className="mb-20">
@@ -94,29 +86,9 @@ export default function BlogContent({ slugName }: { slugName?: string }) {
           {/* Main content */}
           <div className="flex-1">
             {/* Featured Image */}
-            <Card className="mb-8">
-              <CardContent className="p-0">
-                <div className="relative aspect-video w-full rounded-lg overflow-hidden">
-                  <Image
-                    src="/placeholder.svg?height=600&width=1200"
-                    alt="Welcome to a New DeFi Era"
-                    fill
-                    unoptimized
-                  />
-                </div>
-              </CardContent>
-            </Card>
-
             {/* Article content placeholder */}
-            <div className="prose max-w-none dark:prose-invert">
-              <h1>Article content goes here...</h1>
-              {Array(20)
-                .fill(0)
-                .map((_, i) => (
-                  <p key={i}>
-                    This is paragraph {i + 1} of the article content.
-                  </p>
-                ))}
+            <div className="prose max-w-none text-white prose-h1:text-white prose-h2:text-white prose-h3:text-white">
+              <Markdown>{markDownContent}</Markdown>
             </div>
           </div>
 
@@ -167,5 +139,3 @@ export default function BlogContent({ slugName }: { slugName?: string }) {
     </div>
   );
 }
-
-
