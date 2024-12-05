@@ -18,18 +18,23 @@ function BlogList({
 }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [loadCount, setLoadCount] = useState(5);
 
-  const allArticles = articles || [];
+  const getNextArticles = (loadSize: number) => {
+    setLoadCount((prevCount) => prevCount + loadSize);
+  };
 
   const categories = [
     "All",
-    ...new Set(allArticles.map((article) => article.category)),
+    ...new Set(articles?.map((article) => article.category)),
   ];
 
   const filteredArticles =
     selectedCategory === "All"
-      ? allArticles
-      : allArticles.filter((article) => article.category === selectedCategory);
+      ? articles?.slice(0, loadCount)
+      : articles
+          ?.filter((article) => article.category === selectedCategory)
+          .slice(0, loadCount);
 
   const handleFilterArticleByCategory = (category: string) => {
     setSelectedCategory(category);
@@ -96,8 +101,8 @@ function BlogList({
         </div>
 
         <div className="space-y-12 sm:space-y-16 md:space-y-24">
-          {filteredArticles.length > 0 ? (
-            filteredArticles.map((article, i) => (
+          {filteredArticles ? (
+            filteredArticles?.map((article, i) => (
               <div key={i} className="border-t border-gray-800 pt-8 sm:pt-12">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                   {/* Left Column - Index and Category */}
@@ -132,6 +137,17 @@ function BlogList({
             <p className="text-center text-gray-400 text-lg">
               No articles found for this category.
             </p>
+          )}
+        </div>
+
+        <div className="w-full mt-20 flex justify-center">
+          {loadCount < ((selectedCategory === "All" ? articles : filteredArticles)?.length ?? 0)  && (
+            <button
+              className={`px-4 py-2 text-base rounded bg-gray-800 text-gray-400 hover:bg-gray-700`}
+              onClick={() => getNextArticles(1)}
+            >
+              Load More
+            </button>
           )}
         </div>
       </main>

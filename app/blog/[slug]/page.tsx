@@ -48,21 +48,11 @@ export default async function Page({
     );
 
     const article = response.data.data?.[0];
-    const slugLength = response.data?.data?.length || 0;
-    if (!slugLength) {
-      return notFound();
-    }
+    const slugLength: number = response.data?.data.length || 0;
+    const title: string = article.title;
+    const author: string = article.author.name;
+    const date = article.publishedAt;
 
-    const title = article.attributes.title;
-    const author =
-      article.attributes.author?.data?.attributes?.name || "Anonymous";
-    const date = article.attributes.publishedAt;
-    const category =
-      article.attributes.category?.data?.attributes?.name || "Uncategorized";
-    const coverImage =
-      article.attributes.coverImage?.data?.attributes?.url || null;
-    const markDownContent =
-      article.attributes.blocks?.[0]?.body || "No content available.";
     const articlesInfo = await getArticlesInfo();
 
     const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -71,17 +61,25 @@ export default async function Page({
       day: "2-digit",
     }).format(new Date(date));
 
+    const markDownContent = article.blocks?.[0].body;
+    if (!slugLength) {
+      return notFound();
+    }
+
+    console.log(article.category.name);
+
     return (
-      <BlogContent
-        markDownContent={markDownContent}
-        title={title}
-        date={formattedDate}
-        author={author}
-        articlesInfo={articlesInfo}
-        slugName={params.slug}
-        category={category}
-        coverImage={coverImage}
-      />
+      <>
+        <BlogContent
+          markDownContent={markDownContent}
+          title={title}
+          date={formattedDate}
+          author={author}
+          articlesInfo={articlesInfo}
+          slugName={params.slug}
+          category={article.category.name}
+        />
+      </>
     );
   } catch (error) {
     console.error("Error fetching article:", error);
