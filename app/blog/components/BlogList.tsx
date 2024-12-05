@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import Image from "next/image";
-import { ArticleWithCategoryAndPhoto } from "../page";
 
 const FeaturedArticles = [
   {
