@@ -50,6 +50,7 @@ export default async function Page(props: {
     const title: string = article.title;
     const author: string = article.author.name;
     const date = article.publishedAt;
+    const category = article.category.name
 
     const articlesInfo = await getArticlesInfo();
 
@@ -64,7 +65,7 @@ export default async function Page(props: {
       return notFound();
     }
 
-    console.log(article.category.name);
+    
 
     return (
       <>
@@ -75,7 +76,7 @@ export default async function Page(props: {
           author={author}
           articlesInfo={articlesInfo}
           slugName={params.slug}
-          category={article.category.name}
+          category={category}
         />
       </>
     );
