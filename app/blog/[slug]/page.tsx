@@ -1,4 +1,4 @@
-import BlogContent from "@/app/blog/[slug]/components/blog/BlogContent"; // currentArticleType,
+import BlogContent from "@/app/blog/[slug]/components/blog/BlogContent";
 import strapiClient from "@/helper/apiClient";
 import { notFound } from "next/navigation";
 
@@ -21,36 +21,48 @@ const getArticlesInfo = async (): Promise<Article[]> => {
     const response = await strapiClient.get(
       "/articles?sort[0]=publishedAt:desc&pagination[page]=1&pagination[pageSize]=4"
     );
-    const articlesInfo = response.data.data.map((article: Article) => {
+    const articlesInfo = response.data.data.map((article: any) => {
       return {
-        title: article.title,
-        slug: article.slug,
-        description: article.description,
+        title: article.attributes.title,
+        slug: article.attributes.slug,
+        description: article.attributes.description,
       };
     });
     return articlesInfo;
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching articles info:", error);
     return [];
   }
 };
 
-export default async function Page(props: {
-  params: Promise<{ slug: string }>;
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams: Record<string, string>;
 }) {
-  const params = await props.params;
-
   try {
     const response = await strapiClient.get(
       `/articles?filters[slug][$eq]=${params.slug}&populate=*`
     );
 
     const article = response.data.data?.[0];
-    const slugLength: number = response.data?.data.length || 0;
-    const title: string = article.title;
-    const author: string = article.author.name;
-    const date = article.publishedAt;
+    const slugLength = response.data?.data?.length || 0;
+    if (!slugLength) {
+      return notFound();
+    }
 
+    const title = article.attributes.title;
+    const author =
+      article.attributes.author?.data?.attributes?.name || "Anonymous";
+    const date = article.attributes.publishedAt;
+    const category =
+      article.attributes.category?.data?.attributes?.name || "Uncategorized";
+    const coverImage =
+      article.attributes.coverImage?.data?.attributes?.url || null;
+    const markDownContent =
+      article.attributes.blocks?.[0]?.body || "No content available.";
     const articlesInfo = await getArticlesInfo();
 
     const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -59,25 +71,17 @@ export default async function Page(props: {
       day: "2-digit",
     }).format(new Date(date));
 
-    const markDownContent = article.blocks?.[0].body;
-    if (!slugLength) {
-      return notFound();
-    }
-
-    console.log(article.category.name);
-
     return (
-      <>
-        <BlogContent
-          markDownContent={markDownContent}
-          title={title}
-          date={formattedDate}
-          author={author}
-          articlesInfo={articlesInfo}
-          slugName={params.slug}
-          category={article.category.name}
-        />
-      </>
+      <BlogContent
+        markDownContent={markDownContent}
+        title={title}
+        date={formattedDate}
+        author={author}
+        articlesInfo={articlesInfo}
+        slugName={params.slug}
+        category={category}
+        coverImage={coverImage}
+      />
     );
   } catch (error) {
     console.error("Error fetching article:", error);

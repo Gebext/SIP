@@ -32,8 +32,12 @@ export type ArticleWithCategoryAndPhoto = Article & {
   } | null;
 };
 
-async function Page({searchParams}:{searchParams:{pagination:string}}) {
-  const {pagination} = await searchParams
+async function Page({
+  searchParams,
+}: {
+  searchParams: { pagination: string };
+}) {
+  const { pagination } = await searchParams;
 
   const getArticlesPicAndCategory = async () => {
     try {
@@ -48,7 +52,8 @@ async function Page({searchParams}:{searchParams:{pagination:string}}) {
             description: article.description,
             cover: `${
               (process.env.BACK_ADDRESS as string) +
-              (article.cover?.formats.medium?.url||"/uploads/No_image_available_svg_c7e2aaf9b6.png")
+              (article.cover?.formats.medium?.url ||
+                "/uploads/No_image_available_svg_c7e2aaf9b6.png")
             }`,
             date: new Intl.DateTimeFormat("en-CA").format(
               new Date(article.publishedAt as string)
