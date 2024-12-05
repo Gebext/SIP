@@ -2,6 +2,9 @@ import strapiClient from "@/helper/apiClient";
 import { Article } from "./[slug]/page";
 import BlogList from "./components/BlogList";
 
+export const dynamic = "force-dynamic"; // SSR for all pages
+export const dynamicParams = true; // Allow on-demand rendering
+
 export type ArticleWithCategoryAndPhoto = Article & {
   category?: {
     id?: number;
