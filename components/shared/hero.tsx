@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Navigation from "../ui/navbar";
-import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
