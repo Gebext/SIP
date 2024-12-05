@@ -34,15 +34,25 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
     
     const article = response.data.data?.[0]
     const slugLength:number = response.data?.data.length||0
+    const title:string = article.title
+    const author:string = article.author.name
+    const date = article.publishedAt
+
+    const formattedDate = new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    }).format(new Date(date));
+    
     const markDownContent = article.blocks?.[0].body
     if (!slugLength) {
       return notFound()
     }
 
     return (
-      <div className="mx-auto min-h-screen max-w-7xl px-4 py-8">
-        <BlogContent slugName={params.slug} markDownContent={markDownContent} />
-      </div>
+      <>
+        <BlogContent markDownContent={markDownContent} title={title} date={formattedDate} author={author} />
+      </>
     );
   } catch (error) {
     console.error("Error fetching article:", error); // Trigger 404 if an error occurs

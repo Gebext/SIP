@@ -46,17 +46,17 @@ export type currentArticleType = {
 // }
 
 export default function BlogContent({
-  slugName,
-  markDownContent,
+  markDownContent,title,date,author
 }: {
-  slugName?: string;
-  markDownContent?: any;
+  title?:string
+  markDownContent?: string;
+  date?:string
+  author?:string
 }) {
-  console.log(markDownContent);
 
   return (
-    <div className="min-h-screen bg-black text-white text-foreground">
-      <div className="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8 py-12 ">
+    <div className=" bg-black text-white text-foreground">
+      <div className="px-4  sm:px-6 lg:px-8 py-12 ">
         {/* Header container with Back to Blog, Date, and Title */}
         <div className="mb-20">
           <Button
@@ -74,12 +74,13 @@ export default function BlogContent({
           </Button>
 
           {/* Date */}
-          <div className="text-muted-foreground mb-2">Nov 14, 2024</div>
+          <div className="text-muted-foreground mb-2">{date}</div>
 
           {/* Title */}
-          <h1 className="text-5xl font-bold tracking-tight">
-            Welcome to a New Yield Era
+          <h1 className="text-6xl font-bold tracking-tight">
+            {title||"Blog Title"}
           </h1>
+          <h3 className="text-lg text-muted-foreground tracking-tight capitalize mt-5">by {author}</h3>
         </div>
 
         <div className="flex flex-col lg:flex-row lg:space-x-16">
