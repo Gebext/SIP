@@ -32,11 +32,7 @@ export type ArticleWithCategoryAndPhoto = Article & {
   } | null;
 };
 
-async function Page(props: {
-  searchParams: Promise<{ pagination: string }>;
-}) {
-  const {pagination} = await props.searchParams
-  console.log(pagination);
+async function Page() {
 
   const getArticlesPicAndCategory = async () => {
     try {
