@@ -16,7 +16,7 @@ export type Article = {
   publishedAt?: string;
 };
 
-export const getArticlesInfo = async (): Promise<Article[]> => {
+const getArticlesInfo = async (): Promise<Article[]> => {
   try {
     const response = await strapiClient.get("/articles?sort[0]=publishedAt:desc&pagination[page]=1&pagination[pageSize]=4");
     const articlesInfo = response.data.data.map((article: Article) => {
