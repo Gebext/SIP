@@ -2,17 +2,42 @@
 
 import { useState } from "react";
 import Navigation from "../ui/navbar";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
+  const eclipseVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 0.2,
+      transition: { duration: 1, ease: "easeOut" },
+    },
+  };
 
   return (
-    <div className="relative min-h-screen bg-black">
+    <div className="relative min-h-screen bg-black lg:px-32">
       <header className=" top-0 w-full p-8 flex justify-between items-center z-10">
-        <div className="flex gap-4 text-gray-400">
-          <span>/ Digital Agency</span>
-        </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-end w-full gap-4">
           <div className="text-gray-100 text-xl font-light font-serif">
             SIP.
           </div>
@@ -41,19 +66,38 @@ export default function Hero() {
         </div>
       </header>
 
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center relative px-4">
+      <motion.div
+        className="min-h-screen bg-black flex flex-col items-center justify-center relative px-4"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Eclipse effect */}
-        <div className="absolute top-[15%] w-64 h-64 bg-white rounded-full blur-3xl opacity-20" />
+        <motion.div
+          className="absolute top-[15%] w-64 h-64 bg-white rounded-full blur-3xl opacity-20"
+          variants={eclipseVariants}
+        />
+
+        {/* Logo */}
+        {/* <motion.img
+          src="../../public/sip-logo.png"
+          alt="SIP Logo"
+          className="mb-8"
+          variants={itemVariants}
+        /> */}
 
         {/* Main content */}
-        <div className="relative space-y-6 text-center">
+        <motion.div
+          className="relative space-y-6 text-center"
+          variants={itemVariants}
+        >
           <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold max-w-4xl leading-tight tracking-tight">
-            Together, we are bigger
+            Lorem ipsum dolor sit
             <br />
-            Than BlackRock
+            amet consectetur.
           </h1>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       <Navigation isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </div>

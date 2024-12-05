@@ -40,24 +40,33 @@ export default function AboutSection() {
           </button>
         </div>
       </div>
-      {/* Introduction Section */}
-      <div className="min-h-screen  flex text-white px-4 py-24 md:px-6 lg:px-8">
+      {/* Animated Introduction Section */}
+      <div className="min-h-screen flex text-white px-4 py-24 md:px-6 lg:px-8">
         <div className="flex justify-end"></div>
         <div className="max-w-[1400px] mx-auto">
-          <div className="mb-8">
-            <span className="text-sm md:text-base opacity-80">
-              / About Fleava
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-tight tracking-tight">
-            We create award
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1 }}
+            className="mb-8"
+          >
+            <span className="text-sm md:text-base opacity-80">/ About SIP</span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2, duration: 1 }}
+            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-tight tracking-tight"
+          >
+            Lorem, ipsum dolor.
             <br />
             <span className="border-t border-white/20 block pt-4 mt-4">
               winning Websites,
             </span>
             <span className="block">memorable Campaigns,</span>
             <span className="block">&amp; remarkable Brands.</span>
-          </h1>
+          </motion.h1>
         </div>
       </div>
 
@@ -106,11 +115,11 @@ export default function AboutSection() {
               className="flex-1 text-2xl md:text-4xl leading-relaxed"
             >
               Based out of <span className="underline">Singapore</span> and{" "}
-              <span className="underline">Bali, Indonesia</span>, Fleava has
-              become one of the best quality Digital Agencies Worldwide. Our
-              focus has always been to create enjoyable, intuitive, engaging,
-              and remarkable experiences for people — thats what sets us apart
-              from everyone else.
+              <span className="underline">Bali, Indonesia</span>, SIP has become
+              one of the best quality Digital Agencies Worldwide. Our focus has
+              always been to create enjoyable, intuitive, engaging, and
+              remarkable experiences for people — thats what sets us apart from
+              everyone else.
             </motion.div>
           </div>
         </motion.div>
