@@ -1,53 +1,83 @@
-import BlogContent, {
-  // currentArticleType,
-} from "@/app/blog/[slug]/components/blog/BlogContent";
+import BlogContent from "@/app/blog/[slug]/components/blog/BlogContent"; // currentArticleType,
 import strapiClient from "@/helper/apiClient";
 import { notFound } from "next/navigation";
 
-export const dynamic = 'force-dynamic'; // SSR for all pages
+export const dynamic = "force-dynamic"; // SSR for all pages
 export const dynamicParams = true; // Allow on-demand rendering
 
-// export async function generateStaticParams() {
-//   try {
-//     // Fetch data from Strapi
-//     const response = await strapiClient.get("/articles");
-//     const articles: currentArticleType = response.data;
+export type Article = {
+  id?: number;
+  documentId?: string;
+  title?: string;
+  description?: string;
+  slug?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+};
 
-  
-//     const paths = articles.data?.map((article) => ({
-//       slug: article.slug,
-//     }));
-//     return paths||[];
-//   } catch (error) {
-//     console.log("Error fetching articles for static params:", error);
-//     return []; // Return empty array if there's an error
-//   }
-// }
+export const getArticlesInfo = async (): Promise<Article[]> => {
+  try {
+    const response = await strapiClient.get("/articles?sort[0]=publishedAt:desc&pagination[page]=1&pagination[pageSize]=4");
+    const articlesInfo = response.data.data.map((article: Article) => {
+      return {
+        title: article.title,
+        slug: article.slug,
+        description: article.description,
+      };
+    });
+    return articlesInfo
+  } catch (error) {
+    console.log(error);
+    return []
+  }
+};
 
-export default async function Page(props: { params: Promise<{ slug: string }> }) {
+export default async function Page(props: {
+  params: Promise<{ slug: string }>;
+}) {
   const params = await props.params;
 
   try {
     const response = await strapiClient.get(
       `/articles?filters[slug][$eq]=${params.slug}&populate=*`
     );
+
+    const article = response.data.data?.[0];
+    const slugLength: number = response.data?.data.length || 0;
+    const title: string = article.title;
+    const author: string = article.author.name;
+    const date = article.publishedAt;
+
+    const articlesInfo = await getArticlesInfo()
+
     
-    const article = response.data.data?.[0]
-    const slugLength:number = response.data?.data.length||0
-    const markDownContent = article.blocks?.[0].body
+
+    const formattedDate = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+    }).format(new Date(date));
+
+    const markDownContent = article.blocks?.[0].body;
     if (!slugLength) {
-      return notFound()
+      return notFound();
     }
 
     return (
-      <div className="mx-auto min-h-screen max-w-7xl px-4 py-8">
-        <BlogContent slugName={params.slug} markDownContent={markDownContent} />
-      </div>
+      <>
+        <BlogContent
+          markDownContent={markDownContent}
+          title={title}
+          date={formattedDate}
+          author={author}
+          articlesInfo={articlesInfo}
+          slugName={params.slug}
+        />
+      </>
     );
   } catch (error) {
     console.error("Error fetching article:", error); // Trigger 404 if an error occurs
-    return notFound()
+    return notFound();
   }
 }
-
-

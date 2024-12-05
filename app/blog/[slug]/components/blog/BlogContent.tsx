@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Markdown from "react-markdown";
+import { Article } from "../../page";
 
 export type currentArticleType = {
   data?: [
@@ -46,17 +46,23 @@ export type currentArticleType = {
 // }
 
 export default function BlogContent({
-  slugName,
   markDownContent,
+  title,
+  date,
+  author,
+  articlesInfo,
+  slugName
 }: {
-  slugName?: string;
-  markDownContent?: any;
+  title?: string;
+  markDownContent?: string;
+  date?: string;
+  author?: string;
+  articlesInfo: Article[];
+  slugName?:string
 }) {
-  console.log(markDownContent);
-
   return (
-    <div className="min-h-screen bg-black text-white text-foreground">
-      <div className="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8 py-12 ">
+    <div className=" bg-black text-white text-foreground">
+      <div className="px-4  sm:px-6 lg:px-8 py-12 ">
         {/* Header container with Back to Blog, Date, and Title */}
         <div className="mb-20">
           <Button
@@ -72,14 +78,15 @@ export default function BlogContent({
               Back to blog
             </Link>
           </Button>
-
           {/* Date */}
-          <div className="text-muted-foreground mb-2">Nov 14, 2024</div>
-
+          <div className="text-muted-foreground mb-2">{date}</div>
           {/* Title */}
-          <h1 className="text-5xl font-bold tracking-tight">
-            Welcome to a New Yield Era
+          <h1 className="text-6xl font-bold tracking-tight">
+            {title || "Blog Title"}
           </h1>
+          <h3 className="text-lg text-muted-foreground tracking-tight capitalize mt-5">
+            by {author}
+          </h3>
         </div>
 
         <div className="flex flex-col lg:flex-row lg:space-x-16">
@@ -97,38 +104,23 @@ export default function BlogContent({
             <div className="sticky top-8">
               <Card>
                 <CardHeader>
-                  <CardTitle>Announcement</CardTitle>
+                  <CardTitle>Newest Blog Posts</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <h3 className="font-semibold mb-4">Jump to</h3>
                   <nav className="flex flex-col space-y-3">
-                    <Link
-                      href="#pills-campaign"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      Pills Campaign: The Grand Finale (Last week of November)
-                    </Link>
-                    <Separator />
-                    <Link
-                      href="#yield-discovery"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      Yield Discovery Era (Last week of November)
-                    </Link>
-                    <Separator />
-                    <Link
-                      href="#airdrop"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      $USUAL Airdrop (mid-December)
-                    </Link>
-                    <Separator />
-                    <Link
-                      href="#allocation"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      $USUAL Allocation
-                    </Link>
+                    {articlesInfo.filter((link)=>link.slug!==slugName).map((link, index) => (
+                      <div key={index}>
+                        <Link
+                          href={`/blog/${link.slug}`}
+                          className="text-muted-foreground hover:text-foreground transition-colors mb-2"
+                        >
+                          {link.title}
+                        </Link>
+                        {index < articlesInfo.length - 1 && <Separator />}{" "}
+                        {/* Add separator between links */}
+                      </div>
+                    ))}
                   </nav>
                 </CardContent>
               </Card>
