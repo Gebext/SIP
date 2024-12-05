@@ -6,9 +6,9 @@ export default function Footer() {
   const [activeMap, setActiveMap] = useState("singapore");
 
   return (
-    <footer className="bg-white text-gray-800 py-20">
+    <footer className="bg-neutral-900 text-white py-20 ">
       <div className="container mx-auto px-4">
-        <h2 className="text-gray-700 text-7xl md:text-8xl mb-10">{"Let's Talk"}</h2>
+        <h2 className="text-white text-7xl md:text-8xl mb-10">Let's Talk.</h2>
 
         {/* Google Maps Embed */}
         <div className="mb-20">
@@ -17,8 +17,8 @@ export default function Footer() {
               onClick={() => setActiveMap("singapore")}
               className={`px-4 py-2 rounded ${
                 activeMap === "singapore"
-                  ? "bg-gray-700 text-white"
-                  : "bg-gray-200 text-gray-700"
+                  ? "bg-white text-black"
+                  : "bg-black text-white border-white/20 hover:bg-white/10 hover:text-white"
               }`}
             >
               Singapore Office
@@ -27,8 +27,8 @@ export default function Footer() {
               onClick={() => setActiveMap("bali")}
               className={`px-4 py-2 rounded ${
                 activeMap === "bali"
-                  ? "bg-gray-700 text-white"
-                  : "bg-gray-200 text-gray-700"
+                  ? "bg-white text-black"
+                  : "bg-black text-white border-white/20 hover:bg-white/10 hover:text-white"
               }`}
             >
               Bali Office
@@ -58,9 +58,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Singapore Office */}
           <div className="space-y-4">
-            <h3 className="text-lg text-gray-700 mb-6">Singapore</h3>
-            <div className="space-y-1 text-sm text-gray-600">
-              <p>SIP PTE. LTD.</p>
+            <h3 className="text-lg text-gray-300 mb-6">Singapore</h3>
+            <div className="space-y-1 text-sm text-gray-400">
+              <p>FLEAVA PTE. LTD.</p>
               <p>180 Robinson Road, #14-04</p>
               <p>Singapore Business Federation</p>
               <p>Centre - 068914, Singapore</p>
@@ -69,9 +69,9 @@ export default function Footer() {
 
           {/* Bali Office */}
           <div className="space-y-4">
-            <h3 className="text-lg text-gray-700 mb-6">Bali, Indonesia</h3>
-            <div className="space-y-1 text-sm text-gray-600">
-              <p>PT SAMUDRA INTIDAYA PERKASA</p>
+            <h3 className="text-lg text-gray-300 mb-6">Bali, Indonesia</h3>
+            <div className="space-y-1 text-sm text-gray-400">
+              <p>PT FLEAVA DIGITAL MEDIA</p>
               <p>Jalan Merta Agung, No.25,</p>
               <p>Kerobokan Kelod, Badung,</p>
               <p>Bali - 80361, Indonesia</p>
@@ -80,65 +80,58 @@ export default function Footer() {
 
           {/* Navigation Links 1 */}
           <div className="space-y-4">
-            <ul className="space-y-3 text-sm text-gray-600">
-              <li className="flex items-baseline">
-                <a href="#" className="hover:text-gray-700">Home</a>
+            <ul className="space-y-3 text-sm text-gray-400">
+              <li>
+                <a href="#" className="hover:text-white">Home</a>
               </li>
-              <li className="flex items-baseline">
-                <a href="#" className="hover:text-gray-700">Works</a>
-                <sup className="text-xs ml-1 opacity-50">17</sup>
+              <li>
+                <a href="#" className="hover:text-white">Works</a>
               </li>
-              <li className="flex items-baseline">
-                <a href="#" className="hover:text-gray-700">Expertise</a>
-                <sup className="text-xs ml-1 opacity-50">06</sup>
+              <li>
+                <a href="#" className="hover:text-white">Expertise</a>
               </li>
-              <li className="flex items-baseline">
-                <a href="#" className="hover:text-gray-700">About</a>
+              <li>
+                <a href="#" className="hover:text-white">About</a>
               </li>
-              <li className="flex items-baseline">
-                <a href="#" className="hover:text-gray-700">Journal</a>
-                <sup className="text-xs ml-1 opacity-50">33</sup>
+              <li>
+                <a href="#" className="hover:text-white">Journal</a>
               </li>
             </ul>
           </div>
 
           {/* Navigation Links 2 */}
           <div className="space-y-4">
-            <ul className="space-y-3 text-sm text-gray-600">
-              <li className="flex items-baseline">
-                <a href="#" className="hover:text-gray-700">Awards</a>
-                <sup className="text-xs ml-1 opacity-50">59</sup>
-              </li>
-              <li className="flex items-baseline">
-                <a href="#" className="hover:text-gray-700">Brands</a>
-                <sup className="text-xs ml-1 opacity-50">141</sup>
-              </li>
-              <li className="flex items-baseline">
-                <a href="#" className="hover:text-gray-700">Careers</a>
-                <sup className="text-xs ml-1 opacity-50">04</sup>
+            <ul className="space-y-3 text-sm text-gray-400">
+              <li>
+                <a href="#" className="hover:text-white">Awards</a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-700">Inquiries</a>
+                <a href="#" className="hover:text-white">Brands</a>
               </li>
-              <li className="flex items-baseline">
-                <a href="#" className="hover:text-gray-700">Transform</a>
-                <span className="ml-2">→</span>
+              <li>
+                <a href="#" className="hover:text-white">Careers</a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white">Inquiries</a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white">Transform</a>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-20 flex flex-col md:flex-row justify-between items-start md:items-center text-sm">
+        <div className="mt-20 flex flex-col md:flex-row justify-between items-start md:items-center text-sm text-gray-400">
           <div className="flex space-x-4 mb-4 md:mb-0">
-            <a href="#" className="hover:text-gray-700">Wa</a>
-            <a href="#" className="hover:text-gray-700">Tl</a>
-            <a href="#" className="hover:text-gray-700">Tw</a>
+            <a href="#" className="hover:text-white">Wa</a>
+            <a href="#" className="hover:text-white">Tl</a>
+            <a href="#" className="hover:text-white">Tw</a>
           </div>
-          <div className="flex items-center space-x-4 text-gray-600">
-            <span>© 2024 SIP.</span>
-            <a href="#" className="hover:text-gray-700">Terms.</a>
-            <a href="#" className="hover:text-gray-700">Sitemap.</a>
+          <div className="flex items-center space-x-4">
+            <span>© 2024 Fleava.</span>
+            <a href="#" className="hover:text-white">Terms.</a>
+            <a href="#" className="hover:text-white">Sitemap.</a>
           </div>
         </div>
       </div>
