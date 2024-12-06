@@ -3,11 +3,10 @@
 import { useState } from "react";
 import Navigation from "../ui/navbar";
 import { motion } from "framer-motion";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 export default function Hero() {
   const locale = useLocale();
-  const t = useTranslations();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const containerVariants = {
     hidden: { opacity: 0 },

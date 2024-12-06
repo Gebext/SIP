@@ -5,12 +5,12 @@ import { getMessages } from "next-intl/server";
 
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  // Fetch messages based on the current locale
+  const { locale } = await params; // Await the params Promise
   const messages = await getMessages();
 
   return (

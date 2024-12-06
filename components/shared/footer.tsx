@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 const navigationLinks = [
   {
