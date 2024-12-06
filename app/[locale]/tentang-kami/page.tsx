@@ -2,9 +2,11 @@
 
 import Navigation from "@/components/ui/navbar";
 import { motion, useInView } from "framer-motion";
+import { useLocale } from "next-intl";
 import { useRef, useState } from "react";
 
 export default function AboutSection() {
+  const locale = useLocale();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const ref = useRef(null);
   const isInView = useInView(ref);
@@ -153,7 +155,11 @@ export default function AboutSection() {
         </motion.div>
       </div>
 
-      <Navigation isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <Navigation
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        locale={locale}
+      />
     </section>
   );
 }

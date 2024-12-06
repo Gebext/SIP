@@ -3,22 +3,24 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 interface NavigationProps {
   isOpen: boolean;
   onClose: () => void;
+  locale: string;
 }
 
 const navigationLinks = [
-  { label: "Home", href: "/" },
-  { label: "Tentang Kami", href: "/tentang-kami" },
-  { label: "Fokus Layanan", href: "/fokus-layanan" },
-  { label: "Blog", href: "/blog" },
+  { label: "home", href: "/" },
+  { label: "tentangKami", href: "/tentang-kami" },
+  { label: "fokusLayanan", href: "/fokus-layanan" },
+  { label: "blog", href: "/blog" },
 ];
 
 const officeLocations = [
   {
-    city: "Jakarta",
+    city: "jakarta",
     address: [
       "Jl. Casablanca Raya Kav. 88",
       "Jakarta Selatan",
@@ -28,11 +30,16 @@ const officeLocations = [
 ];
 
 const additionalLinks = [
-  { label: "Hubungi Kami", href: "/contact" },
-  { label: "Karir", href: "/karir" },
+  { label: "hubungiKami", href: "/contact" },
+  { label: "karir", href: "/karir" },
 ];
 
-export default function Navigation({ isOpen, onClose }: NavigationProps) {
+export default function Navigation({
+  isOpen,
+  onClose,
+  locale,
+}: NavigationProps) {
+  const t = useTranslations();
   const router = useRouter();
   const [isClosing, setIsClosing] = useState(false);
 
@@ -45,7 +52,7 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
   const handleLinkClick = (href: string) => {
     setIsClosing(true);
     setTimeout(() => {
-      router.push(href);
+      router.push(`/${locale}${href}`); // Ensure locale is prefixed for correct navigation
       onClose();
     }, 300); // Adjust this delay to match your animation duration
   };
@@ -98,14 +105,14 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
                     exit={{ opacity: 0, y: 20 }}
                   >
                     <a
-                      href={link.href}
+                      href={`/${locale}${link.href}`} // Dynamically create href with locale
                       className="hover:text-white transition-colors"
                       onClick={(e) => {
                         e.preventDefault();
                         handleLinkClick(link.href);
                       }}
                     >
-                      {link.label}
+                      {t(link.label)} {/* Translate label */}
                     </a>
                   </motion.li>
                 ))}
@@ -121,7 +128,7 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
             >
               {officeLocations.map((office) => (
                 <div key={office.city}>
-                  <h3 className="font-medium mb-4">{office.city}</h3>
+                  <h3 className="font-medium mb-4">{t(office.city)}</h3>
                   <p className="text-sm">
                     {office.address.map((line, index) => (
                       <span key={index}>
@@ -138,14 +145,14 @@ export default function Navigation({ isOpen, onClose }: NavigationProps) {
                   {additionalLinks.map((link) => (
                     <li key={link.label}>
                       <a
-                        href={link.href}
+                        href={`/${locale}${link.href}`} // Dynamically create href with locale
                         className="hover:text-white transition-colors"
                         onClick={(e) => {
                           e.preventDefault();
                           handleLinkClick(link.href);
                         }}
                       >
-                        {link.label}
+                        {t(link.label)} {/* Translate label */}
                       </a>
                     </li>
                   ))}

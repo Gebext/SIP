@@ -1,23 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { ChangeEvent, useState } from "react";
 
 const navigationLinks = [
   {
     title: "Main",
     links: [
-      { label: "Home", href: "#" },
-      { label: "Tentang Kami", href: "#" },
-      { label: "Fokus Layanan", href: "#" },
-      { label: "Blog", href: "#" },
+      { label: "Home", href: "/" },
+      { label: "Tentang Kami", href: "/about" },
+      { label: "Fokus Layanan", href: "/services" },
+      { label: "Blog", href: "/blog" },
     ],
   },
   {
     title: "Additional",
     links: [
-      { label: "Whatsapp", href: "#" },
-      { label: "Telegram", href: "#" },
-      { label: "X", href: "#" },
+      { label: "Whatsapp", href: "https://wa.me/123456789" },
+      { label: "Telegram", href: "https://t.me/yourchannel" },
+      { label: "X", href: "https://twitter.com/yourprofile" },
     ],
   },
 ];
@@ -35,16 +36,34 @@ const officeLocations = [
     mapEmbedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4276.421212198338!2d106.83149734569771!3d-6.192814977844081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f43e979ba7b9%3A0xebcc2399febc545f!2sGEDUNG%20MANDIRA!5e1!3m2!1sid!2sid!4v1733371605234!5m2!1sid!2sid",
   },
-  // Add more offices as needed
+];
+
+const languages = [
+  { code: "id", label: "ID" },
+  { code: "en", label: "EN" },
 ];
 
 export default function Footer() {
   const [activeMap, setActiveMap] = useState("jakarta");
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const toggleLanguage = () => {
+    const newLanguage = languages.find(
+      (lang) => lang.code !== pathname.split("/")[1]
+    );
+    if (newLanguage) {
+      const path = pathname.split("/").slice(2).join("/");
+      router.push(`/${newLanguage.code}/${path}`);
+    }
+  };
 
   return (
     <footer className="bg-neutral-900 text-white py-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-white text-7xl md:text-8xl mb-10">{"Let's Talk"}</h2>
+        <h2 className="text-white text-7xl md:text-8xl mb-10">
+          {"Let's Talk"}
+        </h2>
 
         {/* Google Maps Embed */}
         <div className="mb-20">
@@ -55,7 +74,7 @@ export default function Footer() {
                 onClick={() => setActiveMap(office.id)}
                 className={`px-4 py-2 rounded ${
                   activeMap === office.id
-                    ? "bg-black text-white border-white/20 hover:bg-white/10 hover:text-white"
+                    ? "bg-black text-white border-white/20 hover:bg-white/10"
                     : "bg-white text-black"
                 }`}
               >
@@ -75,6 +94,7 @@ export default function Footer() {
                     style={{ border: 0 }}
                     loading="lazy"
                     title={office.name}
+                    aria-label={`Map showing location of ${office.name}`}
                   ></iframe>
                 )
             )}
@@ -111,7 +131,24 @@ export default function Footer() {
         {/* Footer Bottom */}
         <div className="mt-20 flex flex-col md:flex-row justify-between items-start md:items-center text-sm text-gray-400">
           <div className="flex items-center space-x-4">
-            <span>© 2024 Fleava.</span>
+            <span>© 2024 SIP.</span>
+          </div>
+
+          {/* Language Switcher */}
+          <div className="mt-4 md:mt-0">
+            <button
+              onClick={toggleLanguage}
+              className="bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-2 rounded-full transition-colors duration-200 flex items-center space-x-2"
+            >
+              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-white text-neutral-900 font-semibold text-xs">
+                {pathname.split("/")[1].toUpperCase()}
+              </span>
+              <span className="text-xs font-medium">
+                {pathname.split("/")[1] === "id"
+                  ? "Bahasa Indonesia"
+                  : "English"}
+              </span>
+            </button>
           </div>
         </div>
       </div>

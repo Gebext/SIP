@@ -3,8 +3,11 @@
 import { useState } from "react";
 import Navigation from "../ui/navbar";
 import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function Hero() {
+  const locale = useLocale();
+  const t = useTranslations();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -33,6 +36,8 @@ export default function Hero() {
       transition: { duration: 1, ease: "easeOut" },
     },
   };
+
+  console.log(locale);
 
   return (
     <div className="relative min-h-screen bg-black lg:px-32">
@@ -99,7 +104,11 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <Navigation isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <Navigation
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        locale={locale}
+      />
     </div>
   );
 }
