@@ -1,88 +1,105 @@
-import BlogContent from "@/app/blog/[slug]/components/blog/BlogContent";
-import strapiClient from "@/helper/apiClient";
-import { notFound } from "next/navigation";
+"use client";
 
-export const dynamic = "force-dynamic"; // SSR for all pages
-export const dynamicParams = true; // Allow on-demand rendering
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Navigation from "@/components/ui/navbar";
 
-export type Article = {
-  id?: number;
-  documentId?: string;
-  title?: string;
-  description?: string;
-  slug?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  publishedAt?: string;
-};
+export default function Hero() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
 
-const getArticlesInfo = async (): Promise<Article[]> => {
-  try {
-    const response = await strapiClient.get(
-      "/articles?sort[0]=publishedAt:desc&pagination[page]=1&pagination[pageSize]=4"
-    );
-    const articlesInfo = response.data.data.map((article: any) => {
-      return {
-        title: article.attributes.title,
-        slug: article.attributes.slug,
-        description: article.attributes.description,
-      };
-    });
-    return articlesInfo;
-  } catch (error) {
-    console.error("Error fetching articles info:", error);
-    return [];
-  }
-};
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { slug: string };
-  searchParams: Record<string, string>;
-}) {
-  try {
-    const response = await strapiClient.get(
-      `/articles?filters[slug][$eq]=${params.slug}&populate=*`
-    );
+  const eclipseVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 0.2,
+      transition: { duration: 1, ease: "easeOut" },
+    },
+  };
 
-    const article = response.data.data?.[0];
-    const slugLength: number = response.data?.data.length || 0;
-    const title: string = article.title;
-    const author: string = article.author.name;
-    const date = article.publishedAt;
+  return (
+    <div className="relative min-h-screen bg-black lg:px-32">
+      <header className=" top-0 w-full p-8 flex justify-between items-center z-10">
+        <div className="flex items-center justify-end w-full gap-4">
+          <div className="text-gray-100 text-xl font-light font-serif">
+            SIP.
+          </div>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-gray-100 focus:outline-none"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {isMenuOpen ? (
+                <path d="M18 6L6 18M6 6l12 12" />
+              ) : (
+                <path d="M3 12h18M3 6h18M3 18h18" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </header>
 
-    const articlesInfo = await getArticlesInfo();
-
-    const formattedDate = new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "2-digit",
-    }).format(new Date(date));
-
-    const markDownContent = article.blocks?.[0].body;
-    if (!slugLength) {
-      return notFound();
-    }
-
-    console.log(article.category.name);
-
-    return (
-      <>
-        <BlogContent
-          markDownContent={markDownContent}
-          title={title}
-          date={formattedDate}
-          author={author}
-          articlesInfo={articlesInfo}
-          slugName={params.slug}
-          category={article.category.name}
+      <motion.div
+        className="min-h-screen bg-black flex flex-col items-center justify-center relative px-4"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Eclipse effect */}
+        <motion.div
+          className="absolute top-[15%] w-64 h-64 bg-white rounded-full blur-3xl opacity-20"
+          variants={eclipseVariants}
         />
-      </>
-    );
-  } catch (error) {
-    console.error("Error fetching article:", error);
-    return notFound();
-  }
+
+        {/* Logo */}
+        {/* <motion.img
+          src="../../public/sip-logo.png"
+          alt="SIP Logo"
+          className="mb-8"
+          variants={itemVariants}
+        /> */}
+
+        {/* Main content */}
+        <motion.div
+          className="relative space-y-6 text-center"
+          variants={itemVariants}
+        >
+          <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold max-w-4xl leading-tight tracking-tight">
+            Lorem ipsum dolor sit
+            <br />
+            amet consectetur.
+          </h1>
+        </motion.div>
+      </motion.div>
+
+      <Navigation isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+    </div>
+  );
 }
