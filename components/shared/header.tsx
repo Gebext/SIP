@@ -16,7 +16,7 @@ export default function Header({ className = "" }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className={`w-full py-8  lg:px-0 ${className}`}>
+    <header className={`w-full   lg:px-0 ${className}`}>
       <div className="flex justify-between items-center">
         <Image src={Logo} alt="logo" className="w-12" />
         <div className="flex items-center gap-4">

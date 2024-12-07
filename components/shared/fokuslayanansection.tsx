@@ -68,7 +68,7 @@ export default function Fokus() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className=" grid grid-cols-2 gap-8"
+          className=" grid md:grid-cols-2 gap-8"
         >
           {expertise.map((item, index) => (
             <motion.div
@@ -77,7 +77,7 @@ export default function Fokus() {
               className="flex items-baseline"
             >
               <motion.h2
-                className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight"
+                className="text-xl md:text-6xl lg:text-7xl font-light tracking-tight"
                 variants={itemVariants}
               >
                 {item.title}
@@ -90,7 +90,7 @@ export default function Fokus() {
               </motion.span>
               {index % 2 === 0 && index < expertise.length - 1 && (
                 <motion.span
-                  className="text-4xl md:text-6xl lg:text-7xl mx-4 text-zinc-600"
+                  className="text-xl md:text-6xl lg:text-7xl mx-4 text-zinc-600"
                   variants={itemVariants}
                 >
                   /
