@@ -1,6 +1,6 @@
 import strapiClient from "@/helper/apiClient";
+import BlogLists from "./components/BlogList";
 import { Article } from "./[slug]/page";
-import BlogList from "./components/BlogList";
 
 export const dynamic = "force-dynamic"; // SSR for all pages
 export const dynamicParams = true; // Allow on-demand rendering
@@ -70,7 +70,7 @@ async function Page() {
 
   return (
     <>
-      <BlogList articles={articlesData} />
+      <BlogLists articles={articlesData} />
     </>
   );
 }

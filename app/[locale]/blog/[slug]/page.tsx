@@ -1,6 +1,6 @@
-import BlogContent from "@/app/blog/[slug]/components/blog/BlogContent";
 import strapiClient from "@/helper/apiClient";
 import { notFound } from "next/navigation";
+import BlogContent from "./components/blog/BlogContent";
 
 export const dynamic = "force-dynamic"; // SSR for all pages
 export const dynamicParams = true; // Allow on-demand rendering
@@ -52,6 +52,7 @@ export default async function Page({
     const title: string = article.title;
     const author: string = article.author.name;
     const date = article.publishedAt;
+    const category = article.category.name;
 
     const articlesInfo = await getArticlesInfo();
 
@@ -66,8 +67,6 @@ export default async function Page({
       return notFound();
     }
 
-    console.log(article.category.name);
-
     return (
       <>
         <BlogContent
@@ -77,7 +76,7 @@ export default async function Page({
           author={author}
           articlesInfo={articlesInfo}
           slugName={params.slug}
-          category={article.category.name}
+          category={category}
         />
       </>
     );
