@@ -2,14 +2,16 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 export default function Fokus() {
+  const t = useTranslations();
   const expertise = [
-    { id: "01", title: "Riset" },
-    { id: "02", title: "Formulasi" },
-    { id: "03", title: "Data dan Analisis" },
-    { id: "04", title: "AdMove/Advokasi" },
+    { id: "01", title: t("riset") },
+    { id: "02", title: t("dataAndAnalysis") },
+    { id: "03", title: t("formula") },
+    { id: "04", title: t("admove") },
   ];
 
   const containerVariants = {
@@ -49,7 +51,7 @@ export default function Fokus() {
 
   return (
     <section className="bg-black text-white min-h-screen flex items-center py-20 lg:px-32 px-4">
-      <div className="container mx-auto">
+      <section className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
         <header className="mb-24">
           <motion.span
             variants={itemVariants}
@@ -57,7 +59,7 @@ export default function Fokus() {
             animate="visible"
             className="text-neutral-400"
           >
-            / Fokus Layanan
+            / {t("fokusLayananSec")}
           </motion.span>
         </header>
 
@@ -65,7 +67,7 @@ export default function Fokus() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="space-y-6"
+          className=" grid grid-cols-2 gap-8"
         >
           {expertise.map((item, index) => (
             <motion.div
@@ -101,12 +103,12 @@ export default function Fokus() {
             className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors pt-8 group"
           >
             <Link href="/fokus-layanan" className="text-lg">
-              Explore all Fokus Layanan
+              {t("exploreAll")}
             </Link>
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </motion.div>
         </motion.div>
-      </div>
+      </section>
     </section>
   );
 }

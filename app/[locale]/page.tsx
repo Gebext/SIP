@@ -4,10 +4,10 @@ import IntroductionHome from "@/components/shared/introduction";
 
 export default function Home() {
   return (
-    <div>
+    <main>
       <Hero />
       <IntroductionHome />
       <Fokus />
-    </div>
+    </main>
   );
 }

@@ -1,13 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "../ui/navbar";
 import { motion } from "framer-motion";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import Header from "./header";
+
+const Sparkle = ({ delay }: { delay: number }) => (
+  <motion.div
+    className="absolute w-1 h-1 bg-white rounded-full"
+    initial={{ opacity: 0, scale: 0 }}
+    animate={{
+      opacity: [0, 1, 0],
+      scale: [0, 1, 0],
+    }}
+    transition={{
+      duration: 2,
+      repeat: Infinity,
+      delay: delay,
+      ease: "easeInOut",
+    }}
+    style={{
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+    }}
+  />
+);
 
 export default function Hero() {
+  const t = useTranslations();
   const locale = useLocale();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [sparkles, setSparkles] = useState<number[]>([]);
+
+  useEffect(() => {
+    setSparkles(Array.from({ length: 50 }, (_, i) => i));
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -40,68 +69,38 @@ export default function Hero() {
 
   return (
     <div className="relative min-h-screen bg-black lg:px-32">
-      <header className=" top-0 w-full p-8 flex justify-between items-center z-10">
-        <div className="flex items-center justify-end w-full gap-4">
-          <div className="text-gray-100 text-xl font-light font-serif">
-            SIP.
-          </div>
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-gray-100 focus:outline-none"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              {isMenuOpen ? (
-                <path d="M18 6L6 18M6 6l12 12" />
-              ) : (
-                <path d="M3 12h18M3 6h18M3 18h18" />
-              )}
-            </svg>
-          </button>
-        </div>
-      </header>
-
-      <motion.div
-        className="min-h-screen bg-black flex flex-col items-center justify-center relative px-4"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Eclipse effect */}
+      <section className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
+        <Header />
         <motion.div
-          className="absolute top-[15%] w-64 h-64 bg-white rounded-full blur-3xl opacity-20"
-          variants={eclipseVariants}
-        />
-
-        {/* Logo */}
-        {/* <motion.img
-          src="../../public/sip-logo.png"
-          alt="SIP Logo"
-          className="mb-8"
-          variants={itemVariants}
-        /> */}
-
-        {/* Main content */}
-        <motion.div
-          className="relative space-y-6 text-center"
-          variants={itemVariants}
+          className="min-h-screen flex flex-col items-center justify-center relative px-4"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold max-w-4xl leading-tight tracking-tight">
-            Lorem ipsum dolor sit
-            <br />
-            amet consectetur.
-          </h1>
+          {/* Sparkling effect */}
+          {sparkles.map((_, index) => (
+            <Sparkle key={index} delay={Math.random() * 5} />
+          ))}
+
+          {/* Eclipse effect */}
+          <motion.div
+            className="absolute top-[15%] w-64 h-64 bg-white rounded-full blur-3xl opacity-20"
+            variants={eclipseVariants}
+          />
+
+          {/* Main content */}
+          <motion.div
+            className="relative space-y-6 text-center"
+            variants={itemVariants}
+          >
+            <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold max-w-4xl leading-tight tracking-tight">
+              {t("opening")}
+              <br />
+              {t("diSIP")}
+            </h1>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </section>
 
       <Navigation
         isOpen={isMenuOpen}

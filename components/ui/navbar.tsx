@@ -22,9 +22,10 @@ const officeLocations = [
   {
     city: "jakarta",
     address: [
-      "Jl. Casablanca Raya Kav. 88",
-      "Jakarta Selatan",
-      "12870, Indonesia",
+      "Samudra Intidaya Perkasa",
+      "Gedung Mandira Lantai 3 NO. 308",
+      "Jl. R.P. Soeroso No. 33",
+      "Menteng - Jakarta Pusat 10350",
     ],
   },
 ];
@@ -139,25 +140,6 @@ export default function Navigation({
                   </p>
                 </div>
               ))}
-
-              <div>
-                <ul className="space-y-2 text-sm">
-                  {additionalLinks.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={`/${locale}${link.href}`} // Dynamically create href with locale
-                        className="hover:text-white transition-colors"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleLinkClick(link.href);
-                        }}
-                      >
-                        {t(link.label)} {/* Translate label */}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </motion.div>
           </nav>
         </motion.div>

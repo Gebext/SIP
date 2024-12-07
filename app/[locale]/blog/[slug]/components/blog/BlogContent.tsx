@@ -57,9 +57,9 @@ export default function BlogContent({
   const link = `/${locale}/blog`
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white lg:px-32">
       {/* Header Section */}
-      <header className="container max-w-[1400px] mx-auto pt-24 pb-32 px-4">
+      <header className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
         <div className="space-y-24">
           {/* Back Button */}
           <Button
@@ -96,7 +96,7 @@ export default function BlogContent({
       )}
 
       {/* Article Content */}
-      <article className="container max-w-[1400px] mx-auto px-4 py-24">
+      <article className="container py-24 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
         <div className="grid grid-cols-12 gap-8">
           {/* Metadata Column */}
           <div className="col-span-3">

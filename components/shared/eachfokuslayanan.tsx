@@ -8,6 +8,7 @@ interface SectionProps {
   title: string;
   heading: string;
   description: string;
+  image: string; // Add image prop
   imageRight: boolean;
 }
 
@@ -15,6 +16,7 @@ export default function EachFokusSection({
   title,
   heading,
   description,
+  image,
   imageRight,
 }: SectionProps) {
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
@@ -31,7 +33,11 @@ export default function EachFokusSection({
           imageRight ? "order-2 md:order-2" : "order-2 md:order-1"
         }`}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 to-orange-500/20 rounded-lg" />
+        <img
+          src={image}
+          alt={title}
+          className="absolute inset-0 w-full h-full object-cover rounded-lg"
+        />
       </div>
 
       {/* Text Content */}
