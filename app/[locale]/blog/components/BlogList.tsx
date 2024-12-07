@@ -47,7 +47,7 @@ function BlogList({
     <div className="min-h-screen bg-black text-white">
       <main className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
         <Header />
-        <header>
+        <header className="py-8">
           <h2 className="text-xs sm:text-sm font-light mb-4 sm:mb-6">/ Blog</h2>
           <h1 className="text-3xl   sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
             Elevating Brands through

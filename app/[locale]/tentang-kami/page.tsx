@@ -44,7 +44,7 @@ export default function AboutSection() {
               <span className="block">{t("orangProfessional")}</span>
             </motion.h1>
             {/* Animated Section */}
-            <div className="bg-black text-white flex flex-col items-start md:justify-between md:py-32  md:p-16">
+            <div className="bg-black text-white flex flex-col items-start md:justify-between md:py-32   md:p-16">
               {/* Animated Content */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}

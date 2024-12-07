@@ -20,8 +20,8 @@ const navigationLinks: { title: string; links: LinkItem[] }[] = [
     title: "Main",
     links: [
       { label: "home", href: "/" },
-      { label: "tentangKami", href: "/about" },
-      { label: "fokusLayanan", href: "/services" },
+      { label: "tentangKami", href: "/tentang-kami" },
+      { label: "fokusLayanan", href: "/fokus-layanan" },
       { label: "blog", href: "/blog" },
     ],
   },
@@ -39,7 +39,7 @@ const navigationLinks: { title: string; links: LinkItem[] }[] = [
         icon: <FaTelegram />,
       },
       {
-        label: "X",
+        label: "Twitter",
         href: "https://twitter.com/yourprofile",
         icon: <FaTwitter />,
       },
@@ -144,7 +144,7 @@ export default function Footer() {
                 {section.links.map((link) => (
                   <li key={link.label}>
                     <Link
-                      href={`/${local}/fokus-layanan`}
+                      href={`/${local}/${link.href}`}
                       className="hover:text-white flex items-center gap-2"
                     >
                       {link.icon && <span>{link.icon}</span>}

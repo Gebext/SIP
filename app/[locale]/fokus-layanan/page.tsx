@@ -26,24 +26,24 @@ const fokusSections: FokusSectionData[] = [
   },
   {
     title: "dataAndAnalysis",
-    heading: "ddaTitle",
-    description: "ddaDesc",
+    heading: "ddaDesc",
+    description: "ddaTitle",
     image:
       "https://media.istockphoto.com/id/2098359215/id/foto/konsep-pemasaran-digital-pebisnis-menggunakan-laptop-dengan-dasbor-iklan-analisis-strategi.jpg?s=2048x2048&w=is&k=20&c=SwBziGI7dV_sMv-XQbucwO184fZuLMh5Z0AhUawe2yc=",
     imageRight: true,
   },
   {
     title: "formula",
-    heading: "rdfTitle",
-    description: "rdfDesc",
+    heading: "rdfDesc",
+    description: "rdfTitle",
     image:
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
     imageRight: false,
   },
   {
     title: "admove",
-    heading: "aaTitle",
-    description: "aaDesc",
+    heading: "aaDesc",
+    description: "aaTitle",
     image:
       "https://media.istockphoto.com/id/497130603/id/foto/pria-berdiri-melawan-papan-tulis-memecahkan-persamaan-fisika-tampilan-belakang-retro.jpg?s=2048x2048&w=is&k=20&c=SzkzsfnxoaF3HQvae9q42PjjV8CcrwYODBjUyLuVirw=",
     imageRight: true,
@@ -73,7 +73,7 @@ export default function FokusLayanan() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 1 }}
-              className="text-md md:text-3xl lg:text-4xl font-light leading-tight"
+              className="text-md md:text-4xl lg:text-4xl font-light leading-tight"
             >
               {t("risetInformasiAnalisis")}
               <br />
