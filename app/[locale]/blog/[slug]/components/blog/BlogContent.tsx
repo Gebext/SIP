@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
 import { Article } from "../../page";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 
 export type currentArticleType = {
   data?: [
@@ -52,6 +53,9 @@ export default function BlogContent({
   category?: string;
   coverImage?: string;
 }) {
+  const locale = useLocale()
+  const link = `/${locale}/blog`
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header Section */}
@@ -63,7 +67,7 @@ export default function BlogContent({
             asChild
             className="p-0 hover:bg-transparent text-gray-500 hover:text-white transition-colors"
           >
-            <Link href="/blog" className="inline-flex items-center">
+            <Link href={link} className="inline-flex items-center">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to blog
             </Link>

@@ -46,11 +46,12 @@ export default async function Page(props: {
     );
 
     const article = response.data.data?.[0];
+    
     const slugLength: number = response.data?.data.length || 0;
     const title: string = article.title;
-    const author: string = article.author.name;
+    const author: string = article.author?.name;
     const date = article.publishedAt;
-    const category = article.category.name;
+    const category = article.category?.name;
 
     const articlesInfo = await getArticlesInfo();
 
