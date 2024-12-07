@@ -95,6 +95,8 @@ export default function Hero() {
           >
             <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold max-w-4xl leading-tight tracking-tight">
               {t("opening")}
+              <span className="text-gray-500">{t("h")}</span>
+              {t("hipFor")}
               <br />
               {t("diSIP")}
             </h1>

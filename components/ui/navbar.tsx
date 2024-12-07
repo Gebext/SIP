@@ -30,11 +30,6 @@ const officeLocations = [
   },
 ];
 
-const additionalLinks = [
-  { label: "hubungiKami", href: "/contact" },
-  { label: "karir", href: "/karir" },
-];
-
 export default function Navigation({
   isOpen,
   onClose,

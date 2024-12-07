@@ -3,9 +3,11 @@
 import { motion } from "framer-motion";
 import { Sparkle } from "lucide-react";
 import SponsorMarquee from "./partnership-marquee";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
 
 export default function IntroductionHome() {
+  const local = useLocale();
   const t = useTranslations();
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -56,7 +58,12 @@ export default function IntroductionHome() {
       animate="visible"
     >
       <div className="flex flex-col  mt-6 mb-12 container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
-        <h2 className="text-sm font-light mb-6">/ {t("siapaKami")}</h2>
+        <Link
+          className="text-sm font-light mb-6"
+          href={`/${local}/fokus-layanan`}
+        >
+          / {t("siapaKami")}
+        </Link>
         <motion.h1
           className="text-[#e6ddd5] text-6xl md:text-7xl lg:text-8xl font-light leading-[1.1] mb-12 tracking-tight "
           variants={headingVariants}

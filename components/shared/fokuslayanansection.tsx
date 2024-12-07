@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 
 export default function Fokus() {
+  const local = useLocale();
   const t = useTranslations();
   const expertise = [
     { id: "01", title: t("riset") },
@@ -102,7 +103,7 @@ export default function Fokus() {
             variants={linkVariants}
             className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors pt-8 group"
           >
-            <Link href="/fokus-layanan" className="text-lg">
+            <Link href={`/${local}/fokus-layanan`} className="text-lg">
               {t("exploreAll")}
             </Link>
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />

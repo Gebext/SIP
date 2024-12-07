@@ -16,7 +16,7 @@ export default function AboutSection() {
       <main className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
         <Header />
         {/* Animated Introduction Section */}
-        <div className="min-h-screen flex text-white px-4 py-24 md:px-6 lg:px-8">
+        <div className="min-h-screen flex text-white px-4 py-12 md:px-6 lg:px-8">
           <div className="flex justify-end"></div>
           <div className="max-w-[1400px] mx-auto">
             <motion.div
@@ -34,7 +34,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 1 }}
-              className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-tight tracking-tight"
+              className="text-3xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-tight tracking-tight"
             >
               {t("kamiAdalah")}
               <br />
@@ -44,7 +44,7 @@ export default function AboutSection() {
               <span className="block">{t("orangProfessional")}</span>
             </motion.h1>
             {/* Animated Section */}
-            <div className="bg-black text-white flex flex-col items-start justify-between p-8 py-32 md:p-16">
+            <div className="bg-black text-white flex flex-col items-start md:justify-between md:py-32  md:p-16">
               {/* Animated Content */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -52,14 +52,17 @@ export default function AboutSection() {
                 transition={{ duration: 0.5 }}
                 className="w-full max-w-5xl"
               >
-                <div className="flex gap-12 items-start">
+                <div className="md:flex flex flex-row-reverse py-4 md:py-0 md:flex-row md:gap-12 items-start">
                   <motion.div
                     initial={{ rotate: -90 }}
                     animate={{ rotate: 0 }}
                     transition={{ duration: 1, ease: "easeOut" }}
                     className="w-24 h-24"
                   >
-                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <svg
+                      viewBox="0 0 100 100"
+                      className="lg:block hidden w-full h-full"
+                    >
                       {[...Array(24)].map((_, i) => (
                         <line
                           key={i}
@@ -70,7 +73,7 @@ export default function AboutSection() {
                           stroke="currentColor"
                           strokeWidth="1"
                           transform={`rotate(${i * 15} 50 50)`}
-                          className="origin-center"
+                          className="origin-center  lg:block hidden"
                         />
                       ))}
                     </svg>
@@ -80,7 +83,7 @@ export default function AboutSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.5 }}
-                    className="flex-1 text-2xl md:text-4xl leading-relaxed"
+                    className="md:flex-1 text-xl md:text-4xl md:leading-relaxed"
                   >
                     {t("perkenalanDesc")}
                   </motion.div>

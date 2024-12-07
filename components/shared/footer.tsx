@@ -1,13 +1,13 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
-import { ReactElement, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { SubscriptionToast } from "@/components/ui/subscription-toast";
-import { FaWhatsapp, FaTelegram, FaTwitter } from "react-icons/fa"; // Import social media icons
-import { useTranslations } from "next-intl";
+import { FaWhatsapp, FaTelegram, FaTwitter } from "react-icons/fa";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
 
 interface LinkItem {
   label: string;
@@ -19,10 +19,10 @@ const navigationLinks: { title: string; links: LinkItem[] }[] = [
   {
     title: "Main",
     links: [
-      { label: "Home", href: "/" },
-      { label: "Tentang Kami", href: "/about" },
-      { label: "Fokus Layanan", href: "/services" },
-      { label: "Blog", href: "/blog" },
+      { label: "home", href: "/" },
+      { label: "tentangKami", href: "/about" },
+      { label: "fokusLayanan", href: "/services" },
+      { label: "blog", href: "/blog" },
     ],
   },
   {
@@ -62,12 +62,8 @@ const officeLocations = [
   },
 ];
 
-const languages = [
-  { code: "id", label: "ID" },
-  { code: "en", label: "EN" },
-];
-
 export default function Footer() {
+  const local = useLocale();
   const [activeMap, setActiveMap] = useState("jakarta");
   const [email, setEmail] = useState("");
   const [showToast, setShowToast] = useState(false);
@@ -147,13 +143,13 @@ export default function Footer() {
               <ul className="space-y-3 text-sm text-gray-400">
                 {section.links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
+                    <Link
+                      href={`/${local}/fokus-layanan`}
                       className="hover:text-white flex items-center gap-2"
                     >
                       {link.icon && <span>{link.icon}</span>}
-                      {link.label}
-                    </a>
+                      {t(link.label)}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -176,6 +172,14 @@ export default function Footer() {
               </Button>
             </form>
           </div>
+        </div>
+
+        {/* Copyright Section */}
+        <div className="mt-16 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
+          <p>
+            &copy; {new Date().getFullYear()} PT Samudra Intidaya Perkasa (SIP).
+            All rights reserved.
+          </p>
         </div>
       </div>
       {showToast && (
