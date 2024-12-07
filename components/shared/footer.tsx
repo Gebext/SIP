@@ -1,12 +1,21 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
+import { SubscriptionToast } from "@/components/ui/subscription-toast";
+import { FaWhatsapp, FaTelegram, FaTwitter } from "react-icons/fa"; // Import social media icons
+import { useTranslations } from "next-intl";
 
-const navigationLinks = [
+interface LinkItem {
+  label: string;
+  href: string;
+  icon?: JSX.Element;
+}
+
+const navigationLinks: { title: string; links: LinkItem[] }[] = [
   {
     title: "Main",
     links: [
@@ -19,9 +28,21 @@ const navigationLinks = [
   {
     title: "Additional",
     links: [
-      { label: "Whatsapp", href: "https://wa.me/123456789" },
-      { label: "Telegram", href: "https://t.me/yourchannel" },
-      { label: "X", href: "https://twitter.com/yourprofile" },
+      {
+        label: "Whatsapp",
+        href: "https://wa.me/123456789",
+        icon: <FaWhatsapp />,
+      },
+      {
+        label: "Telegram",
+        href: "https://t.me/yourchannel",
+        icon: <FaTelegram />,
+      },
+      {
+        label: "X",
+        href: "https://twitter.com/yourprofile",
+        icon: <FaTwitter />,
+      },
     ],
   },
 ];
@@ -49,41 +70,26 @@ const languages = [
 export default function Footer() {
   const [activeMap, setActiveMap] = useState("jakarta");
   const [email, setEmail] = useState("");
-  const pathname = usePathname();
-  const router = useRouter();
+  const [showToast, setShowToast] = useState(false);
+  const t = useTranslations();
 
-  const toggleLanguage = () => {
-    const newLanguage = languages.find(
-      (lang) => lang.code !== pathname.split("/")[1]
-    );
-    if (newLanguage) {
-      const path = pathname.split("/").slice(2).join("/");
-      router.push(`/${newLanguage.code}/${path}`);
-    }
-  };
-
-  const handleSubscribe = async (
-    e: React.FormEvent,
-  ) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Subscribing email:", email);
     try {
-      await axios.post(
-        `/api/subscribe`, 
-        {
-          email
-        }, 
-      );
+      await axios.post(`/api/subscribe`, {
+        email,
+      });
       setEmail("");
+      setShowToast(true);
     } catch (error) {
       console.log(error);
     }
-   
   };
 
   return (
     <footer className="bg-neutral-900 text-white py-20">
-      <div className="container mx-auto px-4">
+      <div className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
         <h2 className="text-white text-7xl md:text-8xl mb-10">
           {"Let's Talk"}
         </h2>
@@ -141,7 +147,11 @@ export default function Footer() {
               <ul className="space-y-3 text-sm text-gray-400">
                 {section.links.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href} className="hover:text-white">
+                    <a
+                      href={link.href}
+                      className="hover:text-white flex items-center gap-2"
+                    >
+                      {link.icon && <span>{link.icon}</span>}
                       {link.label}
                     </a>
                   </li>
@@ -149,52 +159,31 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-        </div>
-
-        {/* Email Subscription */}
-        <div className="mt-20 mb-10">
-          <h3 className="text-xl font-semibold mb-4">
-            Subscribe to Our Newsletter
-          </h3>
-          <form onSubmit={(e) => handleSubscribe(e)} className="flex gap-4">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="flex-grow bg-neutral-800 text-white border-neutral-700"
-            />
-            <Button type="submit" variant="secondary">
-              Subscribe
-            </Button>
-          </form>
-        </div>
-
-        {/* Footer Bottom */}
-        <div className="mt-10 flex flex-col md:flex-row justify-between items-start md:items-center text-sm text-gray-400">
-          <div className="flex items-center space-x-4">
-            <span>© 2024 SIP.</span>
-          </div>
-
-          {/* Language Switcher */}
-          <div className="mt-4 md:mt-0">
-            <button
-              onClick={toggleLanguage}
-              className="bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-2 rounded-full transition-colors duration-200 flex items-center space-x-2"
-            >
-              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-white text-neutral-900 font-semibold text-xs">
-                {pathname.split("/")[1].toUpperCase()}
-              </span>
-              <span className="text-xs font-medium">
-                {pathname.split("/")[1] === "id"
-                  ? "Bahasa Indonesia"
-                  : "English"}
-              </span>
-            </button>
+          {/* Email Subscription */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">{t("subs")}</h3>
+            <form onSubmit={(e) => handleSubscribe(e)} className="flex gap-4">
+              <Input
+                type="email"
+                placeholder={t("enterEmail")}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="flex-grow bg-neutral-800 text-white border-neutral-700"
+              />
+              <Button type="submit" variant="secondary">
+                {t("subscribe")}
+              </Button>
+            </form>
           </div>
         </div>
       </div>
+      {showToast && (
+        <SubscriptionToast
+          message="Thank you for subscribing!"
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </footer>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/components/shared/header";
 import Navigation from "@/components/ui/navbar";
 import { useLocale } from "next-intl";
 import Link from "next/link";
@@ -45,38 +46,10 @@ function BlogList({
   return (
     <div className="min-h-screen bg-black text-white">
       <main className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
-        <div className="flex justify-end">
-          <div className="flex items-center gap-4">
-            <div className="text-gray-100 text-xl font-light font-serif">
-              SIP.
-            </div>
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-100 focus:outline-none"
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {isMenuOpen ? (
-                  <path d="M3 12h18M3 6h18M3 18h18" />
-                ) : (
-                  <path d="M3 12h18M3 6h18M3 18h18" />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-        <header className="py-6 sm:py-8">
+        <Header />
+        <header>
           <h2 className="text-xs sm:text-sm font-light mb-4 sm:mb-6">/ Blog</h2>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
+          <h1 className="text-3xl   sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
             Elevating Brands through
             <br />
             innovation in Digital
@@ -86,7 +59,7 @@ function BlogList({
         </header>
 
         {/* Filter Buttons */}
-        <div className="flex space-x-4 mb-8 overflow-auto">
+        <div className="flex space-x-4 my-8 overflow-auto">
           {categories.map((category) => (
             <button
               key={category}

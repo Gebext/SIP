@@ -21,27 +21,25 @@ const getArticlesInfo = async (): Promise<Article[]> => {
     const response = await strapiClient.get(
       "/articles?sort[0]=publishedAt:desc&pagination[page]=1&pagination[pageSize]=4"
     );
-    const articlesInfo = response.data.data.map((article: any) => {
+    const articlesInfo = response.data.data.map((article: Article) => {
       return {
-        title: article.attributes.title,
-        slug: article.attributes.slug,
-        description: article.attributes.description,
+        title: article.title,
+        slug: article.slug,
+        description: article.description,
       };
     });
     return articlesInfo;
   } catch (error) {
-    console.error("Error fetching articles info:", error);
+    console.log(error);
     return [];
   }
 };
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { slug: string };
-  searchParams: Record<string, string>;
+export default async function Page(props: {
+  params: Promise<{ slug: string }>;
 }) {
+  const params = await props.params;
+
   try {
     const response = await strapiClient.get(
       `/articles?filters[slug][$eq]=${params.slug}&populate=*`
