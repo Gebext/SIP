@@ -2,6 +2,8 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const navigationLinks = [
   {
@@ -45,6 +47,7 @@ const languages = [
 
 export default function Footer() {
   const [activeMap, setActiveMap] = useState("jakarta");
+  const [email, setEmail] = useState("");
   const pathname = usePathname();
   const router = useRouter();
 
@@ -56,6 +59,15 @@ export default function Footer() {
       const path = pathname.split("/").slice(2).join("/");
       router.push(`/${newLanguage.code}/${path}`);
     }
+  };
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would typically send the email to your backend or newsletter service
+    console.log("Subscribing email:", email);
+    // Reset the email input after submission
+    setEmail("");
+    // You might want to show a success message to the user here
   };
 
   return (
@@ -128,8 +140,28 @@ export default function Footer() {
           ))}
         </div>
 
+        {/* Email Subscription */}
+        <div className="mt-20 mb-10">
+          <h3 className="text-xl font-semibold mb-4">
+            Subscribe to Our Newsletter
+          </h3>
+          <form onSubmit={handleSubscribe} className="flex gap-4">
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="flex-grow bg-neutral-800 text-white border-neutral-700"
+            />
+            <Button type="submit" variant="secondary">
+              Subscribe
+            </Button>
+          </form>
+        </div>
+
         {/* Footer Bottom */}
-        <div className="mt-20 flex flex-col md:flex-row justify-between items-start md:items-center text-sm text-gray-400">
+        <div className="mt-10 flex flex-col md:flex-row justify-between items-start md:items-center text-sm text-gray-400">
           <div className="flex items-center space-x-4">
             <span>© 2024 SIP.</span>
           </div>
