@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 
 const navigationLinks = [
   {
@@ -61,13 +62,23 @@ export default function Footer() {
     }
   };
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (
+    e: React.FormEvent,
+  ) => {
     e.preventDefault();
-    // Here you would typically send the email to your backend or newsletter service
     console.log("Subscribing email:", email);
-    // Reset the email input after submission
-    setEmail("");
-    // You might want to show a success message to the user here
+    try {
+      await axios.post(
+        `/api/subscribe`, 
+        {
+          email
+        }, 
+      );
+      setEmail("");
+    } catch (error) {
+      console.log(error);
+    }
+   
   };
 
   return (
@@ -145,7 +156,7 @@ export default function Footer() {
           <h3 className="text-xl font-semibold mb-4">
             Subscribe to Our Newsletter
           </h3>
-          <form onSubmit={handleSubscribe} className="flex gap-4">
+          <form onSubmit={(e) => handleSubscribe(e)} className="flex gap-4">
             <Input
               type="email"
               placeholder="Enter your email"
