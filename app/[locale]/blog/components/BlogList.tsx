@@ -1,6 +1,7 @@
 "use client";
 
 import Navigation from "@/components/ui/navbar";
+import { useLocale } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -16,6 +17,7 @@ function BlogList({
     category: string;
   }[];
 }) {
+  const locale = useLocale();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [loadCount, setLoadCount] = useState(5);
@@ -141,7 +143,9 @@ function BlogList({
         </div>
 
         <div className="w-full mt-20 flex justify-center">
-          {loadCount < ((selectedCategory === "All" ? articles : filteredArticles)?.length ?? 0)  && (
+          {loadCount <
+            ((selectedCategory === "All" ? articles : filteredArticles)
+              ?.length ?? 0) && (
             <button
               className={`px-4 py-2 text-base rounded bg-gray-800 text-gray-400 hover:bg-gray-700`}
               onClick={() => getNextArticles(1)}
@@ -151,7 +155,11 @@ function BlogList({
           )}
         </div>
       </main>
-      <Navigation isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <Navigation
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        locale={locale}
+      />
     </div>
   );
 }

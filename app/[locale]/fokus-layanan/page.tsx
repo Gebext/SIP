@@ -3,6 +3,7 @@
 import EachFokusSection from "@/components/shared/eachfokuslayanan";
 import Navigation from "@/components/ui/navbar";
 import { useState } from "react";
+import { useLocale } from "next-intl";
 
 interface FokusSectionData {
   title: string;
@@ -39,12 +40,13 @@ const fokusSections: FokusSectionData[] = [
     heading:
       "Kami juga turut serta membuka kesempatan kerjasama dengan berbagai stakeholder.",
     description:
-      "untuk mendorong terwujudnya berbagai isu strategis yang berkontribusi terhadap peningkatan kualitas keadaban dan kepentingan publik, yang mempercepat terciptanya kesejahteraan dan keadilan sosial melalui program-program yang menyentuh akar rumput dalam bentuk grassroots activation maupun pemetaan lapangan.",
+      "untuk mendorong terwujudnya berbagai isu strategis yang berkontribusi terhadap peningkatan kualitas keadaban dan kepentingan publik, yang mempercepat terciptanya kesejahteraan dan keadilan sosial melalui program-program yang menyentuh akar rumput dalam bentuk grassroots activation maupun pemetaan lapangan.",
     imageRight: true,
   },
 ];
 
 export default function FokusLayanan() {
+  const locale = useLocale();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   return (
@@ -94,7 +96,6 @@ export default function FokusLayanan() {
       <section>
         <div className="min-h-screen bg-black text-white">
           <div className="max-w-7xl mx-auto px-4 py-20 space-y-32">
-            {/* Digital Strategy Section */}
             {fokusSections.map((section, index) => (
               <EachFokusSection
                 key={index}
@@ -108,7 +109,11 @@ export default function FokusLayanan() {
         </div>
       </section>
 
-      <Navigation isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <Navigation
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        locale={locale}
+      />
     </section>
   );
 }

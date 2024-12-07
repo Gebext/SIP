@@ -2,7 +2,7 @@ import axios from "axios";
 
 const strapiClient = axios.create({
   baseURL: process.env.API_ADDRESS, // Replace with your API's base URL
-  timeout: 10000, // Optional timeout in milliseconds
+  timeout: 10000, 
 });
 
 strapiClient.interceptors.request.use(

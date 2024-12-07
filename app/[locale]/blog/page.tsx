@@ -1,6 +1,6 @@
 import strapiClient from "@/helper/apiClient";
+import BlogLists from "./components/BlogList";
 import { Article } from "./[slug]/page";
-import BlogList from "./components/BlogList";
 
 export const dynamic = "force-dynamic"; // SSR for all pages
 export const dynamicParams = true; // Allow on-demand rendering
@@ -36,7 +36,6 @@ export type ArticleWithCategoryAndPhoto = Article & {
 };
 
 async function Page() {
-
   const getArticlesPicAndCategory = async () => {
     try {
       const response = await strapiClient.get(
@@ -50,7 +49,8 @@ async function Page() {
             description: article.description,
             cover: `${
               (process.env.BACK_ADDRESS as string) +
-              (article.cover?.formats.medium?.url||"/uploads/No_image_available_svg_c7e2aaf9b6.png")
+              (article.cover?.formats.medium?.url ||
+                "/uploads/No_image_available_svg_c7e2aaf9b6.png")
             }`,
             date: new Intl.DateTimeFormat("en-CA").format(
               new Date(article.publishedAt as string)
@@ -70,7 +70,7 @@ async function Page() {
 
   return (
     <>
-      <BlogList articles={articlesData} />
+      <BlogLists articles={articlesData} />
     </>
   );
 }

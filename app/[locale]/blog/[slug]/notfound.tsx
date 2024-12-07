@@ -1,6 +1,6 @@
-import BlogContent from "@/app/blog/[slug]/components/blog/BlogContent"; // currentArticleType,
 import strapiClient from "@/helper/apiClient";
 import { notFound } from "next/navigation";
+import BlogContent from "./components/blog/BlogContent";
 
 export const dynamic = "force-dynamic"; // SSR for all pages
 export const dynamicParams = true; // Allow on-demand rendering
@@ -50,7 +50,7 @@ export default async function Page(props: {
     const title: string = article.title;
     const author: string = article.author.name;
     const date = article.publishedAt;
-    const category = article.category.name
+    const category = article.category.name;
 
     const articlesInfo = await getArticlesInfo();
 
@@ -64,8 +64,6 @@ export default async function Page(props: {
     if (!slugLength) {
       return notFound();
     }
-
-    
 
     return (
       <>
