@@ -3,13 +3,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import Image from "next/image";
 
 interface SectionProps {
   title: string;
   heading: string;
   description: string;
-  image: string; // Add image prop
+  image: string;
   imageRight: boolean;
 }
 
@@ -34,7 +33,7 @@ export default function EachFokusSection({
           imageRight ? "order-2 md:order-2" : "order-2 md:order-1"
         }`}
       >
-        <Image
+        <img
           src={image}
           alt={title}
           className="absolute inset-0 w-full h-full object-cover rounded-lg"
