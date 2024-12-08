@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Navigation from "../ui/navbar";
 import { motion } from "framer-motion";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import Header from "./header";
 import { TypeAnimation } from "react-type-animation";
 
