@@ -93,11 +93,22 @@ export default function Hero() {
             className="relative space-y-6 text-center"
             variants={itemVariants}
           >
-            <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-serif max-w-4xl tracking-tight font-light leading-[1.1] text-shadow-neon">
-              The <span className="text-[#C9FD35]">S</span>H
-              <span className="text-[#C9FD35]">IP</span> of Change Grabbing the{" "}
+            <h1
+              className="
+    text-white 
+    text-5xl md:text-6xl lg:text-7xl 
+    font-serif 
+    max-w-4xl 
+    tracking-tight 
+    font-light 
+    leading-[1.1] 
+    text-shadow-neon
+  "
+            >
+              The S<span className="text-neutral-700">h</span>
+              <span className="text-white ">IP</span> of Change{" "}
               <TypeAnimation
-                sequence={["Future", 1000, "", 500]}
+                sequence={["Grabbing the Future", 1000, "", 500]}
                 wrapper="span"
                 cursor={true}
                 repeat={Infinity}

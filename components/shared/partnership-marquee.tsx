@@ -1,15 +1,17 @@
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image, { StaticImageData } from "next/image";
+import Marquee from "react-fast-marquee";
 import Kominfo from "../../public/partnership/kominfo-removebg-preview.png";
 import PupukIndonesia from "../../public/partnership/pupukindonesia.png";
 import Inalum from "../../public/partnership/inalum.png";
 import Asdp from "../../public/partnership/asdp.png";
-import Esdm from "../../public/partnership/isdm.png";
+import Esdm from "../../public/partnership/images-removebg-preview.png";
+import Mandiri from "../../public/partnership/Bank_Mandiri_logo_2016.svg-removebg-preview.png";
+import BankBni from "../../public/partnership/BNI_logo.svg-removebg-preview.png";
 
 interface Sponsor {
   name: string;
-  logo: string | StaticImageData;
+  logo: StaticImageData;
 }
 
 const sponsors: Sponsor[] = [
@@ -18,6 +20,8 @@ const sponsors: Sponsor[] = [
   { name: "Inalum", logo: Inalum },
   { name: "ESDM", logo: Esdm },
   { name: "Asdp", logo: Asdp },
+  { name: "Mandiri", logo: Mandiri },
+  { name: "BankBni", logo: BankBni },
 ];
 
 export default function SponsorMarquee() {
@@ -30,41 +34,17 @@ export default function SponsorMarquee() {
           {t("partnerAndKlien")}
         </h2>
 
-        <div className="relative">
-          {/* Gradient Masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-64 bg-gradient-to-r from-black to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-64 bg-gradient-to-l from-black to-transparent z-10" />
-
-          {/* Scrolling Container */}
-          <div className="flex overflow-hidden relative w-full">
-            <motion.div
-              className="flex gap-2 md:gap-12 items-center"
-              animate={{ x: [0, -100] }}
-              transition={{
-                duration: 10,
-                ease: "linear",
-                repeat: Infinity,
-              }}
-              style={{
-                display: "flex",
-                minWidth: "400%", // Double the width for infinite loop
-              }}
-            >
-              {sponsors.map((sponsor, index) => (
-                <SponsorLogo
-                  key={`${sponsor.name}-${index}`}
-                  sponsor={sponsor}
-                />
-              ))}
-              {sponsors.map((sponsor, index) => (
-                <SponsorLogo
-                  key={`${sponsor.name}-${index}-duplicate`}
-                  sponsor={sponsor}
-                />
-              ))}
-            </motion.div>
-          </div>
-        </div>
+        <Marquee
+          gradient={true}
+          gradientColor="rgb(0, 0, 0)"
+          gradientWidth={64}
+          speed={40}
+          className="overflow-hidden"
+        >
+          {sponsors.map((sponsor, index) => (
+            <SponsorLogo key={`${sponsor.name}-${index}`} sponsor={sponsor} />
+          ))}
+        </Marquee>
       </div>
     </div>
   );
@@ -72,13 +52,13 @@ export default function SponsorMarquee() {
 
 function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
   return (
-    <div className="flex items-center justify-center w-[300px] sm:w-[300px] h-[100px] sm:h-[100px] opacity-80 hover:opacity-100 transition-opacity ">
+    <div className="flex items-center justify-center w-[200px] sm:w-[300px] h-[100px] sm:h-[100px] mx-4 sm:mx-8">
       <Image
         src={sponsor.logo}
         alt={`${sponsor.name} logo`}
-        width={400}
-        height={200}
-        className="object-contain brightness-0 invert"
+        width={200}
+        height={100}
+        className="object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
       />
     </div>
   );
