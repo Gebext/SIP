@@ -29,7 +29,6 @@ const Sparkle = ({ delay }: { delay: number }) => (
 );
 
 export default function Hero() {
-  const t = useTranslations();
   const locale = useLocale();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [sparkles, setSparkles] = useState<number[]>([]);
