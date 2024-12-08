@@ -53,16 +53,26 @@ export default function Fokus() {
   return (
     <section className="bg-black text-white min-h-screen flex items-center py-20 lg:px-32 px-4">
       <section className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
-        <header className="mb-24">
+        <header className="mb-6">
           <motion.span
             variants={itemVariants}
             initial="hidden"
             animate="visible"
             className="text-neutral-400"
           >
-            / {t("fokusLayananSec")}
+            <Link href={`/${local}/fokus-layanan`}>
+              / {t("fokusLayananSec")}
+            </Link>
           </motion.span>
         </header>
+        <motion.h1
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 1 }}
+          className="text-md md:text-2xl lg:text-3xl font-light leading-tight mb-24 md:w-1/2"
+        >
+          {t("risetInformasiAnalisis")}
+        </motion.h1>
 
         <motion.div
           variants={containerVariants}

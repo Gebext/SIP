@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { Mail, Phone } from "lucide-react";
 
 interface NavigationProps {
   isOpen: boolean;
@@ -27,6 +28,8 @@ const officeLocations = [
       "Jl. R.P. Soeroso No. 33",
       "Menteng - Jakarta Pusat 10350",
     ],
+    email: "samudraintidayaperkasa@gmail.com",
+    phone: "+62 85211313013",
   },
 ];
 
@@ -48,9 +51,9 @@ export default function Navigation({
   const handleLinkClick = (href: string) => {
     setIsClosing(true);
     setTimeout(() => {
-      router.push(`/${locale}${href}`); // Ensure locale is prefixed for correct navigation
+      router.push(`/${locale}${href}`);
       onClose();
-    }, 300); // Adjust this delay to match your animation duration
+    }, 300);
   };
 
   return (
@@ -101,14 +104,14 @@ export default function Navigation({
                     exit={{ opacity: 0, y: 20 }}
                   >
                     <a
-                      href={`/${locale}${link.href}`} // Dynamically create href with locale
+                      href={`/${locale}${link.href}`}
                       className="hover:text-white transition-colors"
                       onClick={(e) => {
                         e.preventDefault();
                         handleLinkClick(link.href);
                       }}
                     >
-                      {t(link.label)} {/* Translate label */}
+                      {t(link.label)}
                     </a>
                   </motion.li>
                 ))}
@@ -125,7 +128,7 @@ export default function Navigation({
               {officeLocations.map((office) => (
                 <div key={office.city}>
                   <h3 className="font-medium mb-4">{t(office.city)}</h3>
-                  <p className="text-sm">
+                  <p className="text-sm mb-4">
                     {office.address.map((line, index) => (
                       <span key={index}>
                         {line}
@@ -133,6 +136,24 @@ export default function Navigation({
                       </span>
                     ))}
                   </p>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <Mail size={16} />
+                    <a
+                      href={`mailto:${office.email}`}
+                      className="hover:text-white transition-colors"
+                    >
+                      {office.email}
+                    </a>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm mt-2">
+                    <Phone size={16} />
+                    <a
+                      href={`tel:${office.phone}`}
+                      className="hover:text-white transition-colors"
+                    >
+                      {office.phone}
+                    </a>
+                  </div>
                 </div>
               ))}
             </motion.div>

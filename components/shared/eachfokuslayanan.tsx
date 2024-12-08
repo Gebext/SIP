@@ -54,7 +54,9 @@ export default function EachFokusSection({
             onClick={toggleDescription}
             className="flex items-center justify-between w-full text-left focus:outline-none"
           >
-            <h3 className="text-4xl font-light leading-tight">{heading}</h3>
+            <h3 className="md:text-4xl text-3xl font-light leading-tight">
+              {heading}
+            </h3>
             <motion.div
               animate={{ rotate: isDescriptionVisible ? 180 : 0 }}
               transition={{ duration: 0.3 }}

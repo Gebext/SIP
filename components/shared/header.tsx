@@ -6,6 +6,7 @@ import { useLocale } from "next-intl";
 import LanguageSwitcher from "./languageswitcher";
 import Logo from "../../public/sip-logo.png";
 import Image from "next/image";
+import Link from "next/link";
 
 interface HeaderProps {
   className?: string;
@@ -16,9 +17,11 @@ export default function Header({ className = "" }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className={`w-full   lg:px-0 ${className}`}>
+    <header className={`w-full lg:px-0 ${className}`}>
       <div className="flex justify-between items-center">
-        <Image src={Logo} alt="logo" className="w-12" />
+        <Link href="/" passHref>
+          <Image src={Logo} alt="logo" className="w-12" />
+        </Link>
         <div className="flex items-center gap-4">
           <LanguageSwitcher />
           <button

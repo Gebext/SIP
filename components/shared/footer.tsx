@@ -5,7 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { SubscriptionToast } from "@/components/ui/subscription-toast";
-import { FaWhatsapp, FaTelegram, FaTwitter } from "react-icons/fa";
+import {
+  FaWhatsapp,
+  FaTelegram,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedin,
+} from "react-icons/fa";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 
@@ -15,45 +21,42 @@ interface LinkItem {
   icon?: JSX.Element;
 }
 
-const navigationLinks: { title: string; links: LinkItem[] }[] = [
+// Data untuk link social media
+const socialLinks: LinkItem[] = [
+  { label: "Whatsapp", href: "https://wa.me/123456789", icon: <FaWhatsapp /> },
+  { label: "Telegram", href: "https://t.me/yourchannel", icon: <FaTelegram /> },
   {
-    title: "Main",
-    links: [
-      { label: "home", href: "/" },
-      { label: "tentangKami", href: "/tentang-kami" },
-      { label: "fokusLayanan", href: "/fokus-layanan" },
-      { label: "blog", href: "/blog" },
-    ],
+    label: "Twitter",
+    href: "https://twitter.com/yourprofile",
+    icon: <FaTwitter />,
   },
   {
-    title: "Additional",
-    links: [
-      {
-        label: "Whatsapp",
-        href: "https://wa.me/123456789",
-        icon: <FaWhatsapp />,
-      },
-      {
-        label: "Telegram",
-        href: "https://t.me/yourchannel",
-        icon: <FaTelegram />,
-      },
-      {
-        label: "Twitter",
-        href: "https://twitter.com/yourprofile",
-        icon: <FaTwitter />,
-      },
-    ],
+    label: "Instagram",
+    href: "https://instagram.com/yourprofile",
+    icon: <FaInstagram />,
   },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/yourprofile",
+    icon: <FaLinkedin />,
+  },
+];
+
+// Data untuk navigasi
+const navigationLinks: { label: string; href: string }[] = [
+  { label: "home", href: "/" },
+  { label: "tentangKami", href: "/tentang-kami" },
+  { label: "fokusLayanan", href: "/fokus-layanan" },
+  { label: "blog", href: "/blog" },
 ];
 
 const officeLocations = [
   {
     id: "jakarta",
-    name: "Jakarta Office",
+    name: "Kantor Official",
+    companyName: "PT. Samudra Intidaya Perkasa",
     address: [
-      "Samudra Intidaya Perkasa",
-      "Gedung Mandira Lantai 3 NO. 308",
+      "Gedung Mandira Lantai 3 No. 308",
       "Jl. R.P. Soeroso No. 33",
       "Menteng - Jakarta Pusat 10350",
     ],
@@ -87,7 +90,7 @@ export default function Footer() {
     <footer className="bg-neutral-900 text-white py-20">
       <div className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
         <h2 className="text-white text-7xl md:text-8xl mb-10">
-          {"Let's Talk"}
+          {t("letstalk")}
         </h2>
 
         {/* Google Maps Embed */}
@@ -127,9 +130,11 @@ export default function Footer() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Office Locations */}
           {officeLocations.map((office) => (
-            <div key={office.id} className="space-y-4">
-              <h3 className="text-lg text-gray-300 mb-6">{office.name}</h3>
+            <div key={office.id} className="space-y-2">
+              <h3 className="text-lg text-gray-300">{office.name}</h3>
+              <h3 className="text-gray-300 text-sm">{office.companyName}</h3>
               <div className="space-y-1 text-sm text-gray-400">
                 {office.address.map((line, index) => (
                   <p key={index}>{line}</p>
@@ -138,23 +143,41 @@ export default function Footer() {
             </div>
           ))}
 
-          {navigationLinks.map((section, index) => (
-            <div key={index} className="space-y-4">
-              <ul className="space-y-3 text-sm text-gray-400">
-                {section.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={`/${local}/${link.href}`}
-                      className="hover:text-white flex items-center gap-2"
-                    >
-                      {link.icon && <span>{link.icon}</span>}
-                      {t(link.label)}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Navigation Links */}
+          <div className="space-y-4">
+            <ul className="space-y-3 text-sm text-gray-400">
+              {navigationLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={`/${local}${link.href}`}
+                    className="hover:text-white"
+                  >
+                    {t(link.label)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Social Media Links */}
+          <div className="space-y-4">
+            <ul className="space-y-3 text-sm text-gray-400">
+              {socialLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white flex items-center gap-2"
+                  >
+                    {link.icon && <span>{link.icon}</span>}
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Email Subscription */}
           <div>
             <h3 className="text-xl font-semibold mb-4">{t("subs")}</h3>
@@ -177,8 +200,8 @@ export default function Footer() {
         {/* Copyright Section */}
         <div className="mt-16 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
           <p>
-            &copy; {new Date().getFullYear()} PT Samudra Intidaya Perkasa (SIP).
-            All rights reserved.
+            &copy; {new Date().getFullYear()} PT. Samudra Intidaya Perkasa
+            (SIP). All rights reserved.
           </p>
         </div>
       </div>

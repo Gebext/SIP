@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkle } from "lucide-react";
+import { ArrowRight, Sparkle } from "lucide-react";
 import SponsorMarquee from "./partnership-marquee";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
@@ -36,6 +36,18 @@ export default function IntroductionHome() {
     },
   };
 
+  const linkVariants = {
+    hidden: { opacity: 0, x: -10 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   const sparkleVariants = {
     hidden: { scale: 0, rotate: 0 },
     visible: {
@@ -60,7 +72,7 @@ export default function IntroductionHome() {
       <div className="flex flex-col  mt-6 mb-12 container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
         <Link
           className="text-sm font-light mb-6"
-          href={`/${local}/fokus-layanan`}
+          href={`/${local}/tentang-kami`}
         >
           / {t("siapaKami")}
         </Link>
@@ -84,6 +96,15 @@ export default function IntroductionHome() {
         >
           {t("siapaKamiDesc")}
         </motion.p>
+        <motion.div
+          variants={linkVariants}
+          className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors pt-8 group"
+        >
+          <Link href={`/${local}/tentang-kami`} className="text-lg">
+            {t("selebihnyaTentangKami")}
+          </Link>
+          <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+        </motion.div>
       </div>
 
       {/* Marquee at the bottom */}

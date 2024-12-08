@@ -2,7 +2,7 @@
 
 import Header from "@/components/shared/header";
 import Navigation from "@/components/ui/navbar";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -19,6 +19,7 @@ function BlogList({
   }[];
 }) {
   const locale = useLocale();
+  const t = useTranslations();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [loadCount, setLoadCount] = useState(5);
@@ -50,11 +51,7 @@ function BlogList({
         <header className="py-8">
           <h2 className="text-xs sm:text-sm font-light mb-4 sm:mb-6">/ Blog</h2>
           <h1 className="text-3xl   sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
-            Elevating Brands through
-            <br />
-            innovation in Digital
-            <br />
-            Transformation.
+            {t("blog1")}
           </h1>
         </header>
 

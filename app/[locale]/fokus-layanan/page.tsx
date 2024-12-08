@@ -26,26 +26,26 @@ const fokusSections: FokusSectionData[] = [
   },
   {
     title: "dataAndAnalysis",
-    heading: "ddaDesc",
-    description: "ddaTitle",
+    heading: "ddaTitle",
+    description: "ddaDesc",
     image:
-      "https://media.istockphoto.com/id/2098359215/id/foto/konsep-pemasaran-digital-pebisnis-menggunakan-laptop-dengan-dasbor-iklan-analisis-strategi.jpg?s=2048x2048&w=is&k=20&c=SwBziGI7dV_sMv-XQbucwO184fZuLMh5Z0AhUawe2yc=",
+      "https://img.freepik.com/free-photo/formula-experiment-atom-chemistry-concept_53876-132147.jpg?t=st=1733636023~exp=1733639623~hmac=ccb315e7043c39d43182f52972f9e35d3b90c9201b7cc86f9357451a60581351&w=1060",
     imageRight: true,
   },
   {
     title: "formula",
-    heading: "rdfDesc",
-    description: "rdfTitle",
+    heading: "rdfTitle",
+    description: "rdfDesc",
     image:
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
     imageRight: false,
   },
   {
     title: "admove",
-    heading: "aaDesc",
-    description: "aaTitle",
+    heading: "aaTitle",
+    description: "aaDesc",
     image:
-      "https://media.istockphoto.com/id/497130603/id/foto/pria-berdiri-melawan-papan-tulis-memecahkan-persamaan-fisika-tampilan-belakang-retro.jpg?s=2048x2048&w=is&k=20&c=SzkzsfnxoaF3HQvae9q42PjjV8CcrwYODBjUyLuVirw=",
+      "https://img.freepik.com/free-photo/anaglyph-effect-man-with-arrow_53876-126886.jpg?t=st=1733635703~exp=1733639303~hmac=9adcd5ef5cd31085097489512d09407eedb59c4b558e214ef3ebb7a1f1a7f46a&w=1380",
     imageRight: true,
   },
 ];
@@ -58,9 +58,9 @@ export default function FokusLayanan() {
   return (
     <section className="bg-black text-white">
       <main className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
-        <section className="h-screen">
+        <section className="md:h-screen">
           <Header />
-          <div className="max-w-5xl lg:py-32 md:py-64 py-16 mx-auto">
+          <div className="max-w-5xl lg:py-32 md:py-64 py-24 mx-auto">
             <motion.h2
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -77,23 +77,20 @@ export default function FokusLayanan() {
             >
               {t("risetInformasiAnalisis")}
               <br />
-              {t("risetInformasiAnalisis2")}
-              <br />
-              {t("risetInformasiAnalisis3")}
             </motion.h1>
             <motion.h2
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
-              className="text-neutral-400 text-sm md:text-xl my-4 font-light w-full leading-relaxed lg:w-full"
+              className="text-neutral-400 lg:text-xl md:text-2xl   my-4 font-light w-full lg:leading-relaxed lg:w-full"
             >
-              {t("risetInformasiAnalisis4")}
+              {t("risetInformasiAnalisis2")}
             </motion.h2>
           </div>
         </section>
 
         <section>
-          <div className="min-h-screen bg-black text-white">
+          <div className="bg-black text-white">
             <div className="max-w-7xl mx-auto px-4 py-20 space-y-32">
               {fokusSections.map((section, index) => (
                 <motion.div

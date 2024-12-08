@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
 import { Article } from "../../page";
 import Image from "next/image";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export type currentArticleType = {
   data?: [
@@ -53,8 +53,9 @@ export default function BlogContent({
   category?: string;
   coverImage?: string;
 }) {
-  const locale = useLocale()
-  const link = `/${locale}/blog`
+  const locale = useLocale();
+  const link = `/${locale}/blog`;
+  const t = useTranslations();
 
   return (
     <div className="min-h-screen bg-black text-white lg:px-32">
@@ -102,11 +103,11 @@ export default function BlogContent({
           <div className="col-span-3">
             <div className="space-y-4 sticky top-8">
               <div className="space-y-1">
-                <p className="text-gray-500 text-sm">Date</p>
+                <p className="text-gray-500 text-sm">{t("tanggal")}</p>
                 <p className="text-sm">{date}</p>
               </div>
               <div className="space-y-1">
-                <p className="text-gray-500 text-sm">Author</p>
+                <p className="text-gray-500 text-sm">{t("penulis")}</p>
                 <p className="text-sm capitalize">{author}</p>
               </div>
             </div>
