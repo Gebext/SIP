@@ -5,6 +5,7 @@ import Navigation from "../ui/navbar";
 import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import Header from "./header";
+import { TypeAnimation } from "react-type-animation";
 
 const Sparkle = ({ delay }: { delay: number }) => (
   <motion.div
@@ -93,12 +94,16 @@ export default function Hero() {
             className="relative space-y-6 text-center"
             variants={itemVariants}
           >
-            <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-serif max-w-4xl  tracking-tight font-light leading-[1.1]">
-              {t("opening")}
-              <span className="text-gray-500">{t("h")}</span>
-              {t("hipFor")}
-              <br />
-              {t("diSIP")}
+            <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-serif max-w-4xl tracking-tight font-light leading-[1.1] text-shadow-neon">
+              The S<span className="text-neutral-500">H</span>IP of Change
+              Grabbing the{" "}
+              <TypeAnimation
+                sequence={["Future", 1000, "", 500]}
+                wrapper="span"
+                cursor={true}
+                repeat={Infinity}
+                style={{ display: "inline-block" }}
+              />
             </h1>
           </motion.div>
         </motion.div>
