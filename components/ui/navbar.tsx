@@ -33,7 +33,7 @@ export default function Navigation({
       city: t("kantorResmi"),
       address: [
         "PT. Samudra Intidaya Perkasa (SIP)",
-        "Gedung Mandira Lantai 3 NO. 308",
+        "Gedung Mandira Lantai 3 No. 308",
         "Jl. R.P. Soeroso No. 33",
         "Menteng - Jakarta Pusat 10350",
       ],
