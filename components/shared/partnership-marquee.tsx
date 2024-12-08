@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image, { StaticImageData } from "next/image";
-import Kominfo from "../../public/partnership/kominfo.png";
+import Kominfo from "../../public/partnership/kominfo-removebg-preview.png";
 import PupukIndonesia from "../../public/partnership/pupukindonesia.png";
 import Inalum from "../../public/partnership/inalum.png";
-import Isdm from "../../public/partnership/isdm.png";
 import Asdp from "../../public/partnership/asdp.png";
+import Esdm from "../../public/partnership/isdm.png";
 
 interface Sponsor {
   name: string;
@@ -16,7 +16,7 @@ const sponsors: Sponsor[] = [
   { name: "Kominfo", logo: Kominfo },
   { name: "PupukIndonesia", logo: PupukIndonesia },
   { name: "Inalum", logo: Inalum },
-  { name: "Isdm", logo: Isdm },
+  { name: "ESDM", logo: Esdm },
   { name: "Asdp", logo: Asdp },
 ];
 
@@ -32,13 +32,13 @@ export default function SponsorMarquee() {
 
         <div className="relative">
           {/* Gradient Masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-black to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-black to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-64 bg-gradient-to-r from-black to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-64 bg-gradient-to-l from-black to-transparent z-10" />
 
           {/* Scrolling Container */}
           <div className="flex overflow-hidden relative w-full">
             <motion.div
-              className="flex gap-6 sm:gap-16 items-center"
+              className="flex gap-2 md:gap-12 items-center"
               animate={{ x: [0, -100] }}
               transition={{
                 duration: 10,
@@ -47,7 +47,7 @@ export default function SponsorMarquee() {
               }}
               style={{
                 display: "flex",
-                minWidth: "200%", // Double the width for infinite loop
+                minWidth: "400%", // Double the width for infinite loop
               }}
             >
               {sponsors.map((sponsor, index) => (
@@ -72,13 +72,13 @@ export default function SponsorMarquee() {
 
 function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
   return (
-    <div className="flex items-center justify-center w-20 sm:w-[120px] opacity-60 hover:opacity-100 transition-opacity">
+    <div className="flex items-center justify-center w-[300px] sm:w-[300px] h-[100px] sm:h-[100px] opacity-80 hover:opacity-100 transition-opacity ">
       <Image
         src={sponsor.logo}
         alt={`${sponsor.name} logo`}
-        width={120}
-        height={40}
-        className="brightness-0 invert"
+        width={400}
+        height={200}
+        className="object-contain brightness-0 invert"
       />
     </div>
   );

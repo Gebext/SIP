@@ -1,15 +1,15 @@
 {
-  "opening": "Kapal Perubahan ",
-  "h": "",
-  "hipFor": "",
-  "diSIP": "Meraih Masa Depan.",
+  "opening": "The S",
+  "h": "h",
+  "hipFor": "IP of Change",
+  "diSIP": "Grabbing the Future.",
 
   "siapaKami": "Siapa Kami?",
   "kamiPercaya": "Kami percaya",
   "tidakAdaYangTidakMungkin": "tiada yang tak mungkin.",
   "siapaKamiDesc": "Kami terbiasa mengerjakan yang tak orang lain kerjakan, bahkan yang jarang terpikirkan orang kebanyakan. Kami selalu berusaha out of the box, yang membuat kami memiliki segmen tersendiri sehingga disukai klien dan pasar di tengah dunia yang terus-menerus berubah cepat.",
 
-  "partnerAndKlien": "Partner dan Klien",
+  "partnerAndKlien": "Partner & Klien",
 
   "fokusLayananSec": "Fokus Layanan",
   "riset": "Riset",
@@ -19,15 +19,16 @@
   "exploreAll": "Jelajahi Semua Fokus Layanan",
   "selebihnyaTentangKami": "Selebihnya Tentang Kami",
 
-  "risetInformasiAnalisis": "Kami menyadari riset, informasi dan data adalah senjata pamungkas dalam menghadapi tantangan zaman dan dunia yang terus berkembang cepat.",
+  "risetInformasiAnalisis": "Dengan mengandalkan riset mendalam, informasi akurat-aktual dan analisis tajam yang berpihak pada transformasi digital, serta terus mendorong terciptanya inovasi baru adalah prinsip kerja yang kerap kami pelihara.",
   "risetInformasiAnalisis2": "Kemajuan teknologi informasi dalam berbagai lini kehidupan yang berkelindan begitu derasnya, menjadikan itu semua memiliki nilai yang sangat berharga, bahkan seolah menandingi emas, berlian ataupun permata. Berangkat dari sini, itulah bekal kami dalam menangkap realitas kekinian, termasuk dalam menggali potensi ekonomi, pasar maupun sosial yang belum tersentuh secara optimal.",
+  "risetInformasiAnalisis3": "Kami menyadari riset, informasi dan data adalah senjata pamungkas dalam menghadapi tantangan zaman dan dunia yang terus berkembang cepat.",
 
   "risetDesc": "Melakukan riset kualitatif dan kuantitatif secara komprehensif dengan didukung data yang valid sehingga membantu klien dalam memecahkan kompleksitas dan akar masalah yang dihadapi. Kami melakukan kajian, penelitian dan memberikan layanan di bidang kebijakan publik, ekonomi bisnis dan sosial yang membantu mengidentifikasi masalah, merumuskan strategi kebijakan yang akurat dan memberikan solusi yang tepat dalam pengambilan keputusan secara efektif dan rasional mencerahkan.",
   "risetTitle": "Kami melakukan riset untuk dunia yang lebih baik.",
-  "rdfDesc": "Dengan didukung para ahli di bidangnya masing-masing kami memberikan rekomendasi strategis yang berbasiskan integrasi data dan informasi sehingga membantu klien dalam menentukan keputusan strategis yang lebih baik. Klien akan lebih mudah merumuskan pembuatan kebijakan yang akurat, tepat waktu dan berkualitas serta membantu agar proses tahapannya lebih terukur, mulai dari perencanaan, pemantauan, analis data dan fase evaluasinya.",
-  "rdfTitle": "Kami menambang informasi dan data yang didukung analisis komprehensif, serta kompatibel dengan transformasi digital.",
-  "ddaDesc": "Berbasiskan jaringan yang luas, kami dapat memperoleh data dan informasi akurat saat melakukan pemetaan kebutuhan dan tantangan klien. Sekmen ini termasuk survei pasar, survei opini publik, survei perilaku yang diperlukan di lapangan. Dengan pendekatan kajian ilmian, klien akan dimudahkan saat hendak mengetahui potensi dan keunggulannya sehingga target klien bisa lebih terukur.",
-  "ddaTitle": "Kami menyediakan rekomendasi strategis yang berkesan dan tak tertandingi.",
+  "ddaDesc": "Dengan didukung para ahli di bidangnya masing-masing kami memberikan rekomendasi strategis yang berbasiskan integrasi data dan informasi sehingga membantu klien dalam menentukan keputusan strategis yang lebih baik. Klien akan lebih mudah merumuskan pembuatan kebijakan yang akurat, tepat waktu dan berkualitas serta membantu agar proses tahapannya lebih terukur, mulai dari perencanaan, pemantauan, analis data dan fase evaluasinya.",
+  "ddaTitle": "Kami menambang informasi dan data yang didukung analisis komprehensif, serta kompatibel dengan transformasi digital.",
+  "rdfDesc": "Berbasiskan jaringan yang luas, kami dapat memperoleh data dan informasi akurat saat melakukan pemetaan kebutuhan dan tantangan klien. Sekmen ini termasuk survei pasar, survei opini publik, survei perilaku yang diperlukan di lapangan. Dengan pendekatan kajian ilmian, klien akan dimudahkan saat hendak mengetahui potensi dan keunggulannya sehingga target klien bisa lebih terukur.",
+  "rdfTitle": "Kami menyediakan rekomendasi strategis yang berkesan dan tak tertandingi.",
   "aaDesc": "Kami juga turut serta membuka kesempatan kerjasama dengan berbagai stakeholder untuk mendorong terwujudnya berbagai isu strategis yang berkontribusi terhadap peningkatan kualitas keadaban dan kepentingan publik, yang mempercepat terciptanya kesejahteraan dan keadilan sosial melalui program-program yang menyentuh akar rumput dalam bentuk grassroots activation maupun pemetaan lapangan.",
   "aaTitle": "Memberikan advokasi yang bicara tentang problem publik dan menyentuh basis akar rumput.",
 
@@ -44,11 +45,12 @@
   "hubungiKami": "Hubungi Kami",
   "karir": "Karir",
   "jakarta": "Jakarta",
+  "kantorResmi": "Kantor Resmi",
 
   "perkenalan": "Perkenalan",
-  "kamiAdalah": "Kami adalah",
-  "orangVisioner": "Orang visioner",
-  "orangProfessional": "Orang profesional",
+  "kamiAdalah": "Kami segelintir",
+  "orangVisioner": "Orang -orang visioner",
+  "orangProfessional": "Profesional kelas dunia",
   "perkenalanDesc1": "yang selalu berjuang terus menerus untuk mendorong terciptanya inovasi baru dan mendukung transformasi digital, yang mendobrak ketidakmungkinan.",
 
   "tentang": "Tentang",

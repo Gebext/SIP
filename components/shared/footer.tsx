@@ -53,8 +53,8 @@ const navigationLinks: { label: string; href: string }[] = [
 const officeLocations = [
   {
     id: "jakarta",
-    name: "Kantor Official",
-    companyName: "PT. Samudra Intidaya Perkasa",
+    name: "kantorResmi",
+    companyName: "PT. Samudra Intidaya Perkasa (SIP)",
     address: [
       "Gedung Mandira Lantai 3 No. 308",
       "Jl. R.P. Soeroso No. 33",
@@ -106,7 +106,7 @@ export default function Footer() {
                     : "bg-white text-black"
                 }`}
               >
-                {office.name}
+                {t(office.name)}
               </button>
             ))}
           </div>
@@ -121,8 +121,8 @@ export default function Footer() {
                     height="100%"
                     style={{ border: 0 }}
                     loading="lazy"
-                    title={office.name}
-                    aria-label={`Map showing location of ${office.name}`}
+                    title={t(office.name)}
+                    aria-label={`Map showing location of ${t(office.name)}`}
                   ></iframe>
                 )
             )}
@@ -133,7 +133,7 @@ export default function Footer() {
           {/* Office Locations */}
           {officeLocations.map((office) => (
             <div key={office.id} className="space-y-2">
-              <h3 className="text-lg text-gray-300">{office.name}</h3>
+              <h3 className="text-lg text-gray-300">{t(office.name)}</h3>
               <h3 className="text-gray-300 text-sm">{office.companyName}</h3>
               <div className="space-y-1 text-sm text-gray-400">
                 {office.address.map((line, index) => (

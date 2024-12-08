@@ -19,20 +19,6 @@ const navigationLinks = [
   { label: "blog", href: "/blog" },
 ];
 
-const officeLocations = [
-  {
-    city: "jakarta",
-    address: [
-      "Samudra Intidaya Perkasa",
-      "Gedung Mandira Lantai 3 NO. 308",
-      "Jl. R.P. Soeroso No. 33",
-      "Menteng - Jakarta Pusat 10350",
-    ],
-    email: "samudraintidayaperkasa@gmail.com",
-    phone: "+62 85211313013",
-  },
-];
-
 export default function Navigation({
   isOpen,
   onClose,
@@ -41,6 +27,20 @@ export default function Navigation({
   const t = useTranslations();
   const router = useRouter();
   const [isClosing, setIsClosing] = useState(false);
+
+  const officeLocations = [
+    {
+      city: t("kantorResmi"),
+      address: [
+        "PT. Samudra Intidaya Perkasa (SIP)",
+        "Gedung Mandira Lantai 3 NO. 308",
+        "Jl. R.P. Soeroso No. 33",
+        "Menteng - Jakarta Pusat 10350",
+      ],
+      email: "samudraintidayaperkasa@gmail.com",
+      phone: "+62 85211313013",
+    },
+  ];
 
   useEffect(() => {
     if (!isOpen) {
@@ -125,9 +125,9 @@ export default function Navigation({
               exit={{ opacity: 0, y: 20 }}
               transition={{ delay: 0.3 }}
             >
-              {officeLocations.map((office) => (
-                <div key={office.city}>
-                  <h3 className="font-medium mb-4">{t(office.city)}</h3>
+              {officeLocations.map((office, index) => (
+                <div key={index}>
+                  <h3 className="font-medium mb-4">{office.city}</h3>
                   <p className="text-sm mb-4">
                     {office.address.map((line, index) => (
                       <span key={index}>

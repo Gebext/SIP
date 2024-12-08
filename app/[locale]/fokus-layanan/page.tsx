@@ -75,7 +75,7 @@ export default function FokusLayanan() {
               transition={{ delay: 0.2, duration: 1 }}
               className="text-md md:text-4xl lg:text-4xl font-light leading-tight"
             >
-              {t("risetInformasiAnalisis")}
+              {t("risetInformasiAnalisis3")}
               <br />
             </motion.h1>
             <motion.h2
@@ -95,6 +95,7 @@ export default function FokusLayanan() {
               {fokusSections.map((section, index) => (
                 <motion.div
                   key={index}
+                  id={section.title} // Set id dynamically
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 * index, duration: 1 }}

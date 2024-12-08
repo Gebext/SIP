@@ -68,11 +68,11 @@ export default function Hero() {
   console.log(locale);
 
   return (
-    <div className="relative min-h-[100dvh] bg-black lg:px-32">
+    <div className="relative min-h-screen bg-black lg:px-32">
       <section className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
         <Header />
         <motion.div
-          className="min-h-screen flex flex-col items-center justify-center relative px-4"
+          className="flex w-full h-[calc(100dvh-98px)] flex-col items-center justify-center relative px-4"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -93,7 +93,7 @@ export default function Hero() {
             className="relative space-y-6 text-center"
             variants={itemVariants}
           >
-            <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-serif max-w-4xl  tracking-tight font-light leading-[1.1]">
+            <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-serif max-w-4xl  tracking-tight font-light leading-[1.1]">
               {t("opening")}
               <span className="text-gray-500">{t("h")}</span>
               {t("hipFor")}

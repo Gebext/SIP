@@ -7,8 +7,8 @@ export default function SIPAboutSection() {
   const t = useTranslations();
 
   return (
-    <section className="bg-black text-white py-24">
-      <div className="container py-8 px-8 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
+    <section className="bg-black text-white  pb-24">
+      <div className="container py-8 px-8 sm:px-6 lg:px-12 max-w-[1400px] mx-auto ">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
