@@ -65,8 +65,6 @@ export default function Hero() {
     },
   };
 
-  console.log(locale);
-
   return (
     <div className="relative min-h-screen bg-black lg:px-32">
       <section className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">

@@ -74,7 +74,6 @@ export default function Footer() {
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Subscribing email:", email);
     try {
       await axios.post(`/api/subscribe`, {
         email,
