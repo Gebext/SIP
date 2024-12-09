@@ -5,7 +5,6 @@ import Kominfo from "../../public/partnership/kominfo-removebg-preview.png";
 import PupukIndonesia from "../../public/partnership/pupukindonesia.png";
 import Inalum from "../../public/partnership/inalum.png";
 import Asdp from "../../public/partnership/asdp.png";
-import Esdm from "../../public/partnership/images-removebg-preview.png";
 import Mandiri from "../../public/partnership/Bank_Mandiri_logo_2016.svg-removebg-preview.png";
 import BankBni from "../../public/partnership/BNI_logo.svg-removebg-preview.png";
 
@@ -18,7 +17,6 @@ const sponsors: Sponsor[] = [
   { name: "Kominfo", logo: Kominfo },
   { name: "PupukIndonesia", logo: PupukIndonesia },
   { name: "Inalum", logo: Inalum },
-  { name: "ESDM", logo: Esdm },
   { name: "Asdp", logo: Asdp },
   { name: "Mandiri", logo: Mandiri },
   { name: "BankBni", logo: BankBni },

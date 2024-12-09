@@ -30,7 +30,7 @@ const fokusSections: FokusSectionData[] = [
     heading: "ddaTitle",
     description: "ddaDesc",
     image:
-      "https://img.freepik.com/free-photo/formula-experiment-atom-chemistry-concept_53876-132147.jpg?t=st=1733636023~exp=1733639623~hmac=ccb315e7043c39d43182f52972f9e35d3b90c9201b7cc86f9357451a60581351&w=1060",
+      "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2006&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imageRight: true,
   },
   {
@@ -46,7 +46,7 @@ const fokusSections: FokusSectionData[] = [
     heading: "aaTitle",
     description: "aaDesc",
     image:
-      "https://img.freepik.com/free-photo/anaglyph-effect-man-with-arrow_53876-126886.jpg?t=st=1733635703~exp=1733639303~hmac=9adcd5ef5cd31085097489512d09407eedb59c4b558e214ef3ebb7a1f1a7f46a&w=1380",
+      "https://images.unsplash.com/photo-1559613671-dfe2fb6a7680?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imageRight: true,
   },
 ];
