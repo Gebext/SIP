@@ -1,6 +1,7 @@
 import strapiClient from "@/helper/apiClient";
 import { notFound } from "next/navigation";
 import BlogContent from "./components/blog/BlogContent";
+import Head from "next/head";
 
 export const dynamic = "force-dynamic"; // SSR for all pages
 export const dynamicParams = true; // Allow on-demand rendering
@@ -46,12 +47,13 @@ export default async function Page(props: {
     );
 
     const article = response.data.data?.[0];
-    
     const slugLength: number = response.data?.data.length || 0;
     const title: string = article.title;
+    const description: string = article.description;
     const author: string = article.author?.name;
     const date = article.publishedAt;
     const category = article.category?.name;
+    const imageUrl = article.image?.url; // Assume image exists in article data
 
     const articlesInfo = await getArticlesInfo();
 
@@ -68,6 +70,49 @@ export default async function Page(props: {
 
     return (
       <>
+        {/* SEO Metadata */}
+        <Head>
+          <title>{title} | PT Samudra Intidaya Perkasa (SIP)</title>
+          <meta name="description" content={description} />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={description} />
+          <meta
+            property="og:image"
+            content={
+              imageUrl ? `https://sip-jkt.com${imageUrl}` : "/default-image.jpg"
+            }
+          />
+          <meta
+            property="og:url"
+            content={`https://sip-jkt.com/blog/${params.slug}`}
+          />
+          <meta property="og:type" content="article" />
+          <meta property="article:published_time" content={date} />
+          <meta property="article:author" content={author} />
+          <meta property="article:section" content={category} />
+
+          {/* JSON-LD Structured Data */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                headline: title,
+                description: description,
+                author: { "@type": "Person", name: author },
+                datePublished: date,
+                image: imageUrl
+                  ? `https://sip-jkt.com${imageUrl}`
+                  : "/default-image.jpg",
+                url: `https://sip-jkt.com/blog/${params.slug}`,
+                mainEntityOfPage: `https://sip-jkt.com/blog/${params.slug}`,
+              }),
+            }}
+          />
+        </Head>
+
+        {/* Blog Content */}
         <BlogContent
           markDownContent={markDownContent}
           title={title}

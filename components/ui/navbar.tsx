@@ -37,7 +37,7 @@ export default function Navigation({
         "Jl. R.P. Soeroso No. 33",
         "Menteng - Jakarta Pusat 10350",
       ],
-      email: "samudraintidayaperkasa@gmail.com",
+      email: "info@sip-jkt.com",
       phone: "+62 85211313013",
     },
   ];
