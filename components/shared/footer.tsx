@@ -106,7 +106,7 @@ export default function Footer() {
                     : "bg-white text-black"
                 }`}
               >
-                {t(office.name)}
+                Google Maps
               </button>
             ))}
           </div>
