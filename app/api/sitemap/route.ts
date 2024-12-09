@@ -14,11 +14,11 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
   .map(
-    (url) => `  <url>
-    <loc>${escapeXML(url.loc)}</loc>
-    <changefreq>${url.changefreq}</changefreq>
-    <priority>${url.priority}</priority>
-  </url>`
+    (url) => `<url>
+  <loc>${escapeXML(url.loc)}</loc>
+  <changefreq>${url.changefreq}</changefreq>
+  <priority>${url.priority}</priority>
+</url>`
   )
   .join("\n")}
 </urlset>`;
