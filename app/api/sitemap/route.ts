@@ -15,9 +15,9 @@ export async function GET() {
 ${urls
   .map(
     (url) => `  <url>
-    <loc>${escapeXml(url.loc)}</loc>
-    <changefreq>${escapeXml(url.changefreq)}</changefreq>
-    <priority>${escapeXml(url.priority.toString())}</priority>
+    <loc>${escapeXML(url.loc)}</loc>
+    <changefreq>${url.changefreq}</changefreq>
+    <priority>${url.priority}</priority>
   </url>`
   )
   .join("\n")}
@@ -32,21 +32,11 @@ ${urls
 }
 
 // Helper function to escape XML special characters
-function escapeXml(unsafe: string): string {
-  return unsafe.replace(/[<>&'"]/g, (c) => {
-    switch (c) {
-      case "<":
-        return "&lt;";
-      case ">":
-        return "&gt;";
-      case "&":
-        return "&amp;";
-      case "'":
-        return "&apos;";
-      case '"':
-        return "&quot;";
-      default:
-        return c;
-    }
-  });
+function escapeXML(str: string) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 }
