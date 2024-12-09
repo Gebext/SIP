@@ -95,20 +95,19 @@ export default function Hero() {
           >
             <h1
               className="
-    text-white 
-    text-5xl md:text-6xl lg:text-7xl 
-    font-serif 
-    max-w-4xl 
-    tracking-tight 
-    font-light 
-    leading-[1.1] 
-    text-shadow-neon
-  "
+            text-white 
+              text-5xl md:text-6xl lg:text-7xl 
+              font-serif 
+              max-w-4xl 
+              tracking-tight 
+              font-light 
+              leading-[1.1] 
+              text-shadow-neon
+              "
             >
-              The S<span className="text-neutral-700">h</span>
-              <span className="text-white ">IP</span> of Change{" "}
+              The <span className="font-bold">SIP</span> Innovation,
               <TypeAnimation
-                sequence={["Grabbing the Future", 1000, "", 500]}
+                sequence={["Grab the Future", 1000, "", 500]}
                 wrapper="span"
                 cursor={true}
                 repeat={Infinity}

@@ -27,17 +27,17 @@ const socialLinks: LinkItem[] = [
   { label: "Telegram", href: "https://t.me/yourchannel", icon: <FaTelegram /> },
   {
     label: "Twitter",
-    href: "https://twitter.com/yourprofile",
+    href: "https://x.com/i/flow/login?redirect_after_login=%2FSIP_SamudraInti",
     icon: <FaTwitter />,
   },
   {
     label: "Instagram",
-    href: "https://instagram.com/yourprofile",
+    href: "https://www.instagram.com/sip_samudrainti/",
     icon: <FaInstagram />,
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/yourprofile",
+    href: "https://www.linkedin.com/in/pt-samudra-intidaya-perkasa-sip-453b51340?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app ",
     icon: <FaLinkedin />,
   },
 ];
