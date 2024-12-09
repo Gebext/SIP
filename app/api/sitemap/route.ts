@@ -11,24 +11,42 @@ export async function GET() {
 
   // Generate the XML sitemap
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${urls
-        .map(
-          (url) => `
-        <url>
-          <loc>${url.loc}</loc>
-          <changefreq>${url.changefreq}</changefreq>
-          <priority>${url.priority}</priority>
-        </url>
-      `
-        )
-        .join("")}
-    </urlset>`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls
+  .map(
+    (url) => `  <url>
+    <loc>${escapeXml(url.loc)}</loc>
+    <changefreq>${escapeXml(url.changefreq)}</changefreq>
+    <priority>${escapeXml(url.priority.toString())}</priority>
+  </url>`
+  )
+  .join("\n")}
+</urlset>`;
 
   // Return the XML sitemap with the correct content type
   return new NextResponse(sitemap, {
     headers: {
       "Content-Type": "application/xml",
     },
+  });
+}
+
+// Helper function to escape XML special characters
+function escapeXml(unsafe: string): string {
+  return unsafe.replace(/[<>&'"]/g, (c) => {
+    switch (c) {
+      case "<":
+        return "&lt;";
+      case ">":
+        return "&gt;";
+      case "&":
+        return "&amp;";
+      case "'":
+        return "&apos;";
+      case '"':
+        return "&quot;";
+      default:
+        return c;
+    }
   });
 }
