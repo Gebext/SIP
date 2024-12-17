@@ -1,38 +1,62 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
+import { SubscriptionToast } from "@/components/ui/subscription-toast";
+import {
+  FaWhatsapp,
+  FaTelegram,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedin,
+} from "react-icons/fa";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
 
-const navigationLinks = [
+interface LinkItem {
+  label: string;
+  href: string;
+  icon?: JSX.Element;
+}
+
+// Data untuk link social media
+const socialLinks: LinkItem[] = [
+  { label: "Whatsapp", href: "https://wa.me/123456789", icon: <FaWhatsapp /> },
+  { label: "Telegram", href: "https://t.me/yourchannel", icon: <FaTelegram /> },
   {
-    title: "Main",
-    links: [
-      { label: "Home", href: "/" },
-      { label: "Tentang Kami", href: "/about" },
-      { label: "Fokus Layanan", href: "/services" },
-      { label: "Blog", href: "/blog" },
-    ],
+    label: "Twitter",
+    href: "https://x.com/SIP_SamudraInti?t=_bRlp8TzkMWpu6kS24_02Q&s=09",
+    icon: <FaTwitter />,
   },
   {
-    title: "Additional",
-    links: [
-      { label: "Whatsapp", href: "https://wa.me/123456789" },
-      { label: "Telegram", href: "https://t.me/yourchannel" },
-      { label: "X", href: "https://twitter.com/yourprofile" },
-    ],
+    label: "Instagram",
+    href: "https://www.instagram.com/sip_samudrainti/",
+    icon: <FaInstagram />,
   },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/pt-samudra-intidaya-perkasa-sip-453b51340?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app ",
+    icon: <FaLinkedin />,
+  },
+];
+
+// Data untuk navigasi
+const navigationLinks: { label: string; href: string }[] = [
+  { label: "home", href: "/" },
+  { label: "tentangKami", href: "/tentang-kami" },
+  { label: "fokusLayanan", href: "/fokus-layanan" },
+  { label: "blog", href: "/blog" },
 ];
 
 const officeLocations = [
   {
     id: "jakarta",
-    name: "Jakarta Office",
+    name: "kantorResmi",
+    companyName: "PT. Samudra Intidaya Perkasa (SIP)",
     address: [
-      "Samudra Intidaya Perkasa",
-      "Gedung Mandira Lantai 3 NO. 308",
+      "Gedung Mandira Lantai 3 No. 308",
       "Jl. R.P. Soeroso No. 33",
       "Menteng - Jakarta Pusat 10350",
     ],
@@ -41,51 +65,31 @@ const officeLocations = [
   },
 ];
 
-const languages = [
-  { code: "id", label: "ID" },
-  { code: "en", label: "EN" },
-];
-
 export default function Footer() {
+  const local = useLocale();
   const [activeMap, setActiveMap] = useState("jakarta");
   const [email, setEmail] = useState("");
-  const pathname = usePathname();
-  const router = useRouter();
+  const [showToast, setShowToast] = useState(false);
+  const t = useTranslations();
 
-  const toggleLanguage = () => {
-    const newLanguage = languages.find(
-      (lang) => lang.code !== pathname.split("/")[1]
-    );
-    if (newLanguage) {
-      const path = pathname.split("/").slice(2).join("/");
-      router.push(`/${newLanguage.code}/${path}`);
-    }
-  };
-
-  const handleSubscribe = async (
-    e: React.FormEvent,
-  ) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Subscribing email:", email);
     try {
-      await axios.post(
-        `/api/subscribe`, 
-        {
-          email
-        }, 
-      );
+      await axios.post(`/api/subscribe`, {
+        email,
+      });
       setEmail("");
+      setShowToast(true);
     } catch (error) {
       console.log(error);
     }
-   
   };
 
   return (
     <footer className="bg-neutral-900 text-white py-20">
-      <div className="container mx-auto px-4">
+      <div className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
         <h2 className="text-white text-7xl md:text-8xl mb-10">
-          {"Let's Talk"}
+          {t("letstalk")}
         </h2>
 
         {/* Google Maps Embed */}
@@ -101,7 +105,7 @@ export default function Footer() {
                     : "bg-white text-black"
                 }`}
               >
-                {office.name}
+                Google Maps
               </button>
             ))}
           </div>
@@ -116,8 +120,8 @@ export default function Footer() {
                     height="100%"
                     style={{ border: 0 }}
                     loading="lazy"
-                    title={office.name}
-                    aria-label={`Map showing location of ${office.name}`}
+                    title={t(office.name)}
+                    aria-label={`Map showing location of ${t(office.name)}`}
                   ></iframe>
                 )
             )}
@@ -125,9 +129,11 @@ export default function Footer() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Office Locations */}
           {officeLocations.map((office) => (
-            <div key={office.id} className="space-y-4">
-              <h3 className="text-lg text-gray-300 mb-6">{office.name}</h3>
+            <div key={office.id} className="space-y-2">
+              <h3 className="text-lg text-gray-300">{t(office.name)}</h3>
+              <h3 className="text-gray-300 text-sm">{office.companyName}</h3>
               <div className="space-y-1 text-sm text-gray-400">
                 {office.address.map((line, index) => (
                   <p key={index}>{line}</p>
@@ -136,65 +142,74 @@ export default function Footer() {
             </div>
           ))}
 
-          {navigationLinks.map((section, index) => (
-            <div key={index} className="space-y-4">
-              <ul className="space-y-3 text-sm text-gray-400">
-                {section.links.map((link) => (
-                  <li key={link.label}>
-                    <a href={link.href} className="hover:text-white">
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Email Subscription */}
-        <div className="mt-20 mb-10">
-          <h3 className="text-xl font-semibold mb-4">
-            Subscribe to Our Newsletter
-          </h3>
-          <form onSubmit={(e) => handleSubscribe(e)} className="flex gap-4">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="flex-grow bg-neutral-800 text-white border-neutral-700"
-            />
-            <Button type="submit" variant="secondary">
-              Subscribe
-            </Button>
-          </form>
-        </div>
-
-        {/* Footer Bottom */}
-        <div className="mt-10 flex flex-col md:flex-row justify-between items-start md:items-center text-sm text-gray-400">
-          <div className="flex items-center space-x-4">
-            <span>© 2024 SIP.</span>
+          {/* Navigation Links */}
+          <div className="space-y-4">
+            <ul className="space-y-3 text-sm text-gray-400">
+              {navigationLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={`/${local}${link.href}`}
+                    className="hover:text-white"
+                  >
+                    {t(link.label)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Language Switcher */}
-          <div className="mt-4 md:mt-0">
-            <button
-              onClick={toggleLanguage}
-              className="bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-2 rounded-full transition-colors duration-200 flex items-center space-x-2"
-            >
-              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-white text-neutral-900 font-semibold text-xs">
-                {pathname.split("/")[1].toUpperCase()}
-              </span>
-              <span className="text-xs font-medium">
-                {pathname.split("/")[1] === "id"
-                  ? "Bahasa Indonesia"
-                  : "English"}
-              </span>
-            </button>
+          {/* Social Media Links */}
+          <div className="space-y-4">
+            <ul className="space-y-3 text-sm text-gray-400">
+              {socialLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white flex items-center gap-2"
+                  >
+                    {link.icon && <span>{link.icon}</span>}
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
+
+          {/* Email Subscription */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">{t("subs")}</h3>
+            <form onSubmit={(e) => handleSubscribe(e)} className="flex gap-4">
+              <Input
+                type="email"
+                placeholder={t("enterEmail")}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="flex-grow bg-neutral-800 text-white border-neutral-700"
+              />
+              <Button type="submit" variant="secondary">
+                {t("subscribe")}
+              </Button>
+            </form>
+          </div>
+        </div>
+
+        {/* Copyright Section */}
+        <div className="mt-16 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
+          <p>
+            &copy; {new Date().getFullYear()} PT. Samudra Intidaya Perkasa
+            (SIP). All rights reserved.
+          </p>
         </div>
       </div>
+      {showToast && (
+        <SubscriptionToast
+          message="Thank you for subscribing!"
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </footer>
   );
 }
