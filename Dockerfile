@@ -3,8 +3,6 @@ FROM node:20-alpine AS base
 # Install dependencies only when needed
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
-RUN npm cache clean --force
-
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
