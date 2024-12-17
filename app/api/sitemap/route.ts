@@ -6,6 +6,26 @@ export async function GET() {
     { loc: "https://sip-jkt.com/", changefreq: "daily", priority: 1.0 },
     { loc: "https://sip-jkt.com/en", changefreq: "daily", priority: 0.8 },
     { loc: "https://sip-jkt.com/id", changefreq: "daily", priority: 0.8 },
+    {
+      loc: "https://sip-jkt.com/en/tentang-kami",
+      changefreq: "daily",
+      priority: 0.6,
+    },
+    {
+      loc: "https://sip-jkt.com/id/tentang-kami",
+      changefreq: "daily",
+      priority: 0.6,
+    },
+    {
+      loc: "https://sip-jkt.com/id/fokus-layanan",
+      changefreq: "daily",
+      priority: 0.6,
+    },
+    {
+      loc: "https://sip-jkt.com/en/fokus-layanan",
+      changefreq: "daily",
+      priority: 0.6,
+    },
     // Add more URLs here as needed
   ];
 

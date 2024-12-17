@@ -27,7 +27,7 @@ const socialLinks: LinkItem[] = [
   { label: "Telegram", href: "https://t.me/yourchannel", icon: <FaTelegram /> },
   {
     label: "Twitter",
-    href: "https://x.com/i/flow/login?redirect_after_login=%2FSIP_SamudraInti",
+    href: "https://x.com/SIP_SamudraInti?t=_bRlp8TzkMWpu6kS24_02Q&s=09",
     icon: <FaTwitter />,
   },
   {
