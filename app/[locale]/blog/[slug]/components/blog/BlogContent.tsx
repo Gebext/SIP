@@ -58,10 +58,10 @@ export default function BlogContent({
   const t = useTranslations();
 
   return (
-    <div className="min-h-screen bg-black text-white lg:px-32">
+    <div className="min-h-screen bg-black text-white">
       {/* Header Section */}
-      <header className="container py-8 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
-        <div className="space-y-24">
+      <header className="container mx-auto px-4 py-8 md:px-6 lg:px-8 xl:px-12 max-w-7xl">
+        <div className="space-y-12 md:space-y-24">
           {/* Back Button */}
           <Button
             variant="ghost"
@@ -76,7 +76,7 @@ export default function BlogContent({
 
           {/* Title and Category */}
           <div className="space-y-6">
-            <h1 className="text-5xl md:text-7xl font-light tracking-tight leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-light tracking-tight leading-tight">
               {title}
             </h1>
             <p className="text-gray-500 text-lg">/ Blog — {category}</p>
@@ -111,10 +111,10 @@ export default function BlogContent({
       )}
 
       {/* Article Content */}
-      <article className="container py-24 px-4 sm:px-6 lg:px-12 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-12 gap-8">
+      <article className="container mx-auto px-4 py-12 md:py-24 md:px-6 lg:px-8 xl:px-12 max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Metadata Column - Hidden on Mobile */}
-          <div className="col-span-3 hidden md:block">
+          <div className="hidden md:block md:col-span-3">
             <div className="space-y-4 sticky top-8">
               <div className="space-y-1">
                 <p className="text-gray-500 text-sm">{t("tanggal")}</p>
@@ -128,7 +128,7 @@ export default function BlogContent({
           </div>
 
           {/* Main Content Column */}
-          <div className="col-span-12 md:col-span-7">
+          <div className="col-span-1 md:col-span-7">
             <div className="prose prose-invert max-w-none">
               <Markdown>{markDownContent}</Markdown>
             </div>
