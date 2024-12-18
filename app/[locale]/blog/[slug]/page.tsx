@@ -47,6 +47,7 @@ export default async function Page(props: {
     );
 
     const article = response.data.data?.[0];
+    
     const slugLength: number = response.data?.data.length || 0;
     const title: string = article.title;
     const description: string = article.description;

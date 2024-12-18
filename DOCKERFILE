@@ -1,11 +1,10 @@
-# Base image
-FROM node:18-bullseye AS base
-
-# Set working directory
-WORKDIR /app
+FROM node:20-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
+RUN apk add --no-cache libc6-compat
+RUN npm config set registry https://registry.npmmirror.com/ --global
+WORKDIR /app
 
 # Install additional dependencies for compatibility
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -14,13 +13,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Copy dependency files
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-
-# Install dependencies
-RUN \
-  if [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm install --legacy-peer-deps; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm install --frozen-lockfile; \
-  else echo "No lockfile found, exiting..." && exit 1; \
+RUN npm cache clean --force && \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  elif [ -f package-lock.json ]; then npm i --legacy-peer-deps; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
+  else echo "Lockfile not found." && exit 1; \
   fi
 
 # Rebuild the source code only when needed
